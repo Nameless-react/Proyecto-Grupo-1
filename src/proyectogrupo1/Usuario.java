@@ -21,8 +21,8 @@ public class Usuario extends Persona {
     private String nickName;
     private static List<Usuario> users = new ArrayList<>();
     
-    public Usuario (String name, String firstSurName, String secondSurName, byte age, String identification, String password, boolean state, String nickName) {
-        super(name, firstSurName, secondSurName, age, identification);
+    public Usuario (String name, String firstSurName, String secondSurName, byte age, String identification, String email, String password, boolean state, String nickName) {
+        super(name, firstSurName, secondSurName, age, identification, email);
         this.password = password;
         this.nickName = nickName;
         this.state = state;
@@ -62,7 +62,7 @@ public class Usuario extends Persona {
                           + "|\n");
                 writer.close();
                 
-                users.add(new Usuario("Gerardo", "Escamilla", "Alvarado", (byte) 24, "2", "con", false, "Gera"));
+                users.add(new Usuario("Gerardo", "Escamilla", "Alvarado", (byte) 24, "2", "gera1234@gmail.com", "con", false, "Gera"));
                 return users;
                 
               } catch (IOException ex02) {
@@ -87,7 +87,7 @@ public class Usuario extends Persona {
             if (usuario.length < 6) continue;
             
             try {
-                users.add(new Usuario(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[5], Boolean.parseBoolean(usuario[7]), usuario[4])); 
+                users.add(new Usuario(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[7], usuario[5], Boolean.parseBoolean(usuario[8]), usuario[4])); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage());
             }

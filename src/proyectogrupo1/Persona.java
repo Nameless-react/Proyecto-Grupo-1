@@ -14,15 +14,28 @@ public abstract class Persona {
     private String secondSurName;
     private byte age;
     private String identification;
+    private String email;
     
-    public Persona(String name, String firstSurName, String secondSurName, byte age, String identification) {
+    public Persona(String name, String firstSurName, String secondSurName, byte age, String identification, String email) {
         this.name = name;
         this.firstSurName = firstSurName;
         this.secondSurName = secondSurName;
         this.age = age;
         this.identification = identification;
+        this.email = email;
     }
 
+    
+    
+    
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
     public String getName() {
         return name;
