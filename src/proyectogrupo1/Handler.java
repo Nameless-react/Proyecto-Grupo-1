@@ -11,8 +11,13 @@ import javax.swing.JOptionPane;
  * @author joel
  */
 public class Handler {
-    public void showMessage(String message) {
-        JOptionPane.showMessageDialog(null, message);
+    public final int ERROR = JOptionPane.ERROR_MESSAGE; 
+    public final int QUESTION = JOptionPane.QUESTION_MESSAGE; 
+    public final int PLAIN = JOptionPane.PLAIN_MESSAGE; 
+    public final int INFORMATION = JOptionPane.INFORMATION_MESSAGE; 
+    
+    public void showMessage(String message, String title, int type) {
+        JOptionPane.showMessageDialog(null, message, title, type);
     }
             
     public int inputInt(String message) {
@@ -30,6 +35,7 @@ public class Handler {
     public byte inputByte(String message) {
         return Byte.parseByte(JOptionPane.showInputDialog(null, message));
     }
+    
     public long inputLong(String message) {
         return Long.parseLong(JOptionPane.showInputDialog(null, message));
     }

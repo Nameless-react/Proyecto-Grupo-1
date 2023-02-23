@@ -24,6 +24,8 @@ public class Main {
 //        System.out.println(String.join("\n", 
 //                Usuario.users.stream().map(user -> user.name + " " + user.firstSurName + " "+ user.secondSurName).collect(Collectors.toList())));
         Usuario.getUsers("usuarios.txt").stream().forEach(usuario -> System.out.println(usuario.getName() + " "+ usuario.getFirstSurName() + " " + usuario.getSecondSurName() + "\n" + usuario.getEmail()));
+        
+        FormEmpleado.main(args);
     }
     
 }

@@ -52,7 +52,7 @@ public class Usuario extends Persona {
                   File file = new File(fileName);
                   file.createNewFile();
                   FileWriter writer = new FileWriter(fileName);
-                  writer.write("\n2\n" +
+                  writer.write("\n234567873456\n" +
                             "Gerardo\n" +
                             "Escamilla\n" +
                             "Alvarado\n" +
@@ -63,11 +63,11 @@ public class Usuario extends Persona {
                           + "|\n");
                 writer.close();
                 
-                users.add(new Usuario("Gerardo", "Escamilla", "Alvarado", (byte) 24, "2", "gera1234@gmail.com", "con", false, "Gera"));
+                users.add(new Usuario("Gerardo", "Escamilla", "Alvarado", (byte) 24, "23456787654356", "gera1234@gmail.com", "con", false, "Gera"));
                 return users;
                 
               } catch (IOException ex02) {
-                  handler.showMessage("Error al crear archivo: " + ex02.getMessage());
+                  handler.showMessage("Error al crear archivo: " + ex02.getMessage(), "Error", handler.ERROR);
                   return new ArrayList<>();
               }
             }
@@ -75,7 +75,7 @@ public class Usuario extends Persona {
             
             
             
-            handler.showMessage("Error al leer el archivo: " + ex01.getMessage());
+            handler.showMessage("Error al leer el archivo: " + ex01.getMessage(), "Error", handler.ERROR);
             return new ArrayList<>();
         }
         
@@ -90,7 +90,7 @@ public class Usuario extends Persona {
             try {
                 users.add(new Usuario(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[7], usuario[5], Boolean.parseBoolean(usuario[8]), usuario[4])); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                handler.showMessage("Error en la conversión de datos: " + e.getMessage());
+                handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
         }
         return users;
