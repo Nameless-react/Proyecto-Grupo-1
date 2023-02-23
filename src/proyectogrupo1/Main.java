@@ -16,15 +16,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Usuario.users.add(new Usuario("Joel", "García", "Rojas", (byte) 19, "118930275", "1223", false, "Joel"));
-        //Usuario.users.add(new Usuario("Josué", "García", "Rojas", (byte) 18, "123456785", "122ff3", false, "Josué"));
-        
-        
-        
-//        System.out.println(String.join("\n", 
-//                Usuario.users.stream().map(user -> user.name + " " + user.firstSurName + " "+ user.secondSurName).collect(Collectors.toList())));
-        Usuario.getUsers("usuarios.txt").stream().forEach(usuario -> System.out.println(usuario.getName() + " "+ usuario.getFirstSurName() + " " + usuario.getSecondSurName() + "\n" + usuario.getEmail()));
-        
+      
+        Usuario.getUsers("usuarios.txt").stream().forEach(usuario -> System.out.println(usuario.getName() + " " + usuario.getFirstSurName() + " " + usuario.getSecondSurName() + "\n" + usuario.getEmail()));
+        Empleado.addEmployee("Joel", "García", "Rojas", (byte) 19, "118930275", "joel33960@gmail.com", "IT", "2022", 4000000L, "Ingeniero en sistemas", 2345678456L);
         FormEmpleado.main(args);
     }
     

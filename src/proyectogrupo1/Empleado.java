@@ -57,14 +57,17 @@ public class Empleado extends Persona {
                   File file = new File(fileName);
                   file.createNewFile();
                   FileWriter writer = new FileWriter(fileName);
-                  writer.write("\n2\n" +
-                            "Gerardo\n" +
-                            "Escamilla\n" +
-                            "Alvarado\n" +
-                            "Gera\n" +
-                            "con\n" +
+                  writer.write("\n2223456789876543\n" +
+                            "Ignacio\n" +
+                            "Duarte\n" +
+                            "Gómez\n" +
+                            "1200000\n" +
+                            "Finanzas\n" +
                             "24\n" +
-                            "false\n"
+                            "ig124@gmail.com\n" +
+                            "2012\n" +
+                            "Contador\n" +
+                            "345676543\n"
                           + "|\n");
                 writer.close();
                 
@@ -101,7 +104,7 @@ public class Empleado extends Persona {
         return employees;
     }
     
-    public static LinkedList<Empleado> addEmpleados(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber) {
+    public static LinkedList<Empleado> addEmployee(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber) {
         Handler handler = new Handler();
         employees.add(new Empleado(name, firstSurName,  secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber));
         
@@ -110,12 +113,12 @@ public class Empleado extends Persona {
         return employees;
     }
     
-    public static LinkedList<Empleado> editEmpleados(String identification, Empleado newEmpleado) {
+    public static LinkedList<Empleado> editEmployee(String identification, Empleado newEmpleado) {
         Handler handler = new Handler();
         
         for (int i = 0; i < employees.size(); i++) {
             if (identification.equals(employees.get(i).getIdentification())) {
-               employees.set(i, newEmpleado);
+                employees.set(i, newEmpleado);
                 return employees;
             }
         }

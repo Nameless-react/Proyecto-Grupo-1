@@ -13,17 +13,26 @@ import javax.swing.JFrame;
  * @author joel
  */
 public class FormEmpleado extends javax.swing.JFrame {
-
+    private char type;
+    private LinkedList<Empleado> employees = Empleado.getEmployee("empleados.txt");
     /**
      * Creates new form FormEmpleado
+     * @param type
      */
-    public FormEmpleado() {
+    public FormEmpleado(char type) {
         initComponents();
+        this.type = type;
+     
         setLocationRelativeTo(null);
         setTitle("Formulario");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
+        
+        
+        jLabel2.setText(this.type == 'c' ?  "Agregar Empleado" : "Editar Empleado");
+        jButton1.setText(this.type == 'c' ? "Enviar" : "Guardar");
+        if (this.type != 'c') selectedEmployee();
     }
 
     /**
@@ -215,8 +224,8 @@ public class FormEmpleado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel2)))
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -281,6 +290,20 @@ public class FormEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        checkData(); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
+    public void checkData() {
+//        this.employees.stream().forEach(empleado -> System.out.println(empleado.getName() + " " + empleado.getFirstSurName()));
         Handler handler = new Handler();
         
         String name = jTextField1.getText();
@@ -345,10 +368,12 @@ public class FormEmpleado extends javax.swing.JFrame {
             return;
         }
         
+        if (this.type == 'c') Empleado.addEmployee(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber);
+        else Empleado.editEmployee("118930275", new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber));
         
         
-        LinkedList<Empleado> empleados = Empleado.addEmpleados(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber);
-        empleados.stream().forEach(empleado -> System.out.println(empleado.getName() + " " + empleado.getFirstSurName()));
+       
+//        this.employees.stream().forEach(empleado -> System.out.println(empleado.getName() + " " + empleado.getFirstSurName()));
         
         
         jTextField1.setText("");
@@ -366,16 +391,28 @@ public class FormEmpleado extends javax.swing.JFrame {
         jTextField8.setText("");
         jTextField9.setText("");
         jTextField10.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
+    
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    public void selectedEmployee() {
+        Empleado empleado = this.employees.get(0);
+        jTextField1.setText(empleado.getName());
+        jTextField2.setText(empleado.getFirstSurName());
+        jTextField3.setText(empleado.getSecondSurName());
+        
+        
+        jSpinner1.setValue(empleado.getAge());
+        jTextField4.setText(empleado.getIdentification());
+        jTextField5.setText(empleado.getEmail());
+        
+        jTextField6.setText(empleado.getDepartment());
+        jTextField7.setText(empleado.getYearJoined());
+        
+        jTextField8.setText(String.valueOf(empleado.getWage()));
+        jTextField9.setText(empleado.getProfession());
+        jTextField10.setText(String.valueOf(empleado.getEmployeeNumber()));
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -406,7 +443,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEmpleado().setVisible(true);
+                new FormEmpleado('e').setVisible(true);
             }
         });
     }
