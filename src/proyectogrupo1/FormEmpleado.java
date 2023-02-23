@@ -32,6 +32,9 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         jLabel2.setText(this.type == 'c' ?  "Agregar Empleado" : "Editar Empleado");
         jButton1.setText(this.type == 'c' ? "Enviar" : "Guardar");
+        if (this.type != 'c') jTextField4.setEditable(false);
+        
+        
         if (this.type != 'c') selectedEmployee();
     }
 
@@ -369,7 +372,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         }
         
         if (this.type == 'c') Empleado.addEmployee(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber);
-        else Empleado.editEmployee("118930275", new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber));
+        else Empleado.editEmployee(identification, new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber));
         
         
        
@@ -395,7 +398,27 @@ public class FormEmpleado extends javax.swing.JFrame {
     
 
     public void selectedEmployee() {
-        Empleado empleado = this.employees.get(0);
+        Handler handler = new Handler();
+        
+        String identification = "";
+        do {
+            identification = handler.inputString("Digite la identificación del empleado");
+            if (identification == null) identification = "";
+        } while (identification.length() < 8);
+        
+        
+        Empleado empleado = new Empleado("", "", "", (byte) 0, "", "", "", "", 0L, "", 0L);
+        
+        for (int i = 0; i < employees.size(); i++) {
+            if (identification.equals(this.employees.get(i).getIdentification())) {
+                empleado = this.employees.get(i);
+                break;
+            }
+        }
+        
+        
+        
+        if (empleado.getName().isEmpty()) handler.showMessage("Empleado no encontrado: 404", "Error", handler.ERROR);
         jTextField1.setText(empleado.getName());
         jTextField2.setText(empleado.getFirstSurName());
         jTextField3.setText(empleado.getSecondSurName());

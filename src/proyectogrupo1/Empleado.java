@@ -92,11 +92,11 @@ public class Empleado extends Persona {
         String[] fileContentList = fileContent.split("\\|");
        
         for (int i = 0; i < fileContentList.length; i++) {
-            String[] usuario = fileContentList[i].trim().split("\n");
-            if (usuario.length < 6) continue;
+            String[] empleado = fileContentList[i].trim().split("\n");
+            if (empleado.length < 6) continue;
             
             try {
-                employees.add(new Empleado(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[7], usuario[5], usuario[8], Long.parseLong(usuario[4]), usuario[9], Long.parseLong(usuario[10]))); 
+                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]))); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
@@ -122,7 +122,6 @@ public class Empleado extends Persona {
                 return employees;
             }
         }
-        handler.showMessage("Empleado no encontrado", "No encontrado: 404", handler.ERROR);
         return employees;
     }
     
