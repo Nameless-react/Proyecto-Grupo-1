@@ -21,16 +21,24 @@ public class Empleado extends Persona {
     private long wage;
     private String profession;
     private long employeeNumber;
+    private String address;
+    private String phone;
+    private String city;
+    private String state;
     
     private static LinkedList<Empleado> employees = new LinkedList<>();
     
-    public Empleado(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber) {
+    public Empleado(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber, String address, String phone, String city, String state) {
         super(name, firstSurName, secondSurName, age, identification, email);
         this.department = department;
         this.yearJoined = yearJoined;
         this.wage = wage;
         this.profession = profession;
         this.employeeNumber = employeeNumber;
+        this.address = address;
+        this.phone = phone;
+        this.city = city;
+        this.state = state;
     }
 
     
@@ -67,11 +75,15 @@ public class Empleado extends Persona {
                             "ig124@gmail.com\n" +
                             "2012\n" +
                             "Contador\n" +
-                            "345676543\n"
+                            "345676543\n" +
+                            "100 metros sur de la luna\n" +
+                            "83944839\n" +
+                            "Guadalajara\n" +
+                            "ocupado\n"
                           + "|\n");
                 writer.close();
                 
-                employees.add(new Empleado("Ignacio", "Duarte", "Gómez", (byte) 34, "223456789876543", "ig124@gmail.com", "Finanzas", "2012", 1200000L, "Contador", 345676543L));
+                employees.add(new Empleado("Ignacio", "Duarte", "Gómez", (byte) 34, "223456789876543", "ig124@gmail.com", "Finanzas", "2012", 1200000L, "Contador", 345676543L, "100 metros sur de la luna", "83944839", "Guadalajara", "ocupado"));
                 return employees;
                 
               } catch (IOException ex02) {
@@ -96,7 +108,7 @@ public class Empleado extends Persona {
             if (empleado.length < 6) continue;
             
             try {
-                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]))); 
+                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]), empleado[11], empleado[12], empleado[13], empleado[14])); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
@@ -104,9 +116,9 @@ public class Empleado extends Persona {
         return employees;
     }
     
-    public static LinkedList<Empleado> addEmployee(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber) {
+    public static LinkedList<Empleado> addEmployee(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber, String address, String phone, String city, String state) {
         Handler handler = new Handler();
-        employees.add(new Empleado(name, firstSurName,  secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber));
+        employees.add(new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined,wage, profession, employeeNumber, address, phone, city, state));
         
         
         handler.showMessage("Datos guardados exitosamente", "Exito", handler.PLAIN);
@@ -119,9 +131,11 @@ public class Empleado extends Persona {
         for (int i = 0; i < employees.size(); i++) {
             if (identification.equals(employees.get(i).getIdentification())) {
                 employees.set(i, newEmpleado);
+                handler.showMessage("Datos actualizados correctamente", "Exito", handler.PLAIN);
                 return employees;
             }
         }
+        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Exito", handler.PLAIN);
         return employees;
     }
     
@@ -163,5 +177,37 @@ public class Empleado extends Persona {
 
     public void setEmployeeNumber(long employeeNumber) {
         this.employeeNumber = employeeNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
