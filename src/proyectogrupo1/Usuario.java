@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+
 /**
  *
  * @author joel
@@ -94,6 +95,15 @@ public class Usuario extends Persona {
         }
         return users;
     }
+    
+    public static void Agregar(Usuario u){
+        Handler h=new Handler();
+        users.add(u);
+        h.showMessage("Usuario agregado exitosamente!");
+    }
+    
+    
+    
 
     
     
