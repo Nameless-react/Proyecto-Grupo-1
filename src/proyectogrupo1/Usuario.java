@@ -59,7 +59,7 @@ public class Usuario extends Persona {
                             "Gera\n" +
                             "con\n" +
                             "24\n" +
-                            "false\n"
+                            "true\n"
                           + "|\n");
                 writer.close();
                 

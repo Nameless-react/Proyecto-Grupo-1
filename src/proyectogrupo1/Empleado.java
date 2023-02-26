@@ -116,9 +116,9 @@ public class Empleado extends Persona {
         return employees;
     }
     
-    public static LinkedList<Empleado> addEmployee(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber, String address, String phone, String city, String state) {
+    public static LinkedList<Empleado> addEmployee(Empleado empleado) {
         Handler handler = new Handler();
-        employees.add(new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined,wage, profession, employeeNumber, address, phone, city, state));
+        employees.add(empleado);
         
         
         handler.showMessage("Datos guardados exitosamente", "Exito", handler.PLAIN);

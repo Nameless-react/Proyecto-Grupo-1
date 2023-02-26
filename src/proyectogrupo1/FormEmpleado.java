@@ -454,7 +454,7 @@ public class FormEmpleado extends javax.swing.JFrame {
             return;
         } 
         
-        if (this.type == 'c') Empleado.addEmployee(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, states);
+        if (this.type == 'c') Empleado.addEmployee(new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, states));
         else {
             Empleado.editEmployee(identification, new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, states));
             this.dispose();
@@ -508,6 +508,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         
         if (empleado.getName().isEmpty()) handler.showMessage("Empleado no encontrado: 404", "Error", handler.ERROR);
+        
         jTextField1.setText(empleado.getName());
         jTextField2.setText(empleado.getFirstSurName());
         jTextField3.setText(empleado.getSecondSurName());
