@@ -33,6 +33,8 @@ public class Usuario extends Persona {
         Handler handler = new Handler();
         String fileContent = "";
         
+        if (!users.isEmpty()) return users;
+        
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
         
@@ -97,9 +99,9 @@ public class Usuario extends Persona {
     }
     
     public static void Agregar(Usuario u){
-        Handler h=new Handler();
+        Handler h = new Handler();
         users.add(u);
-        h.showMessage("Usuario agregado exitosamente!");
+        h.showMessage("Usuario agregado exitosamente!", "Exito", h.PLAIN);
     }
     
     
