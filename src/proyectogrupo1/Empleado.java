@@ -5,6 +5,7 @@
 package proyectogrupo1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,11 +25,11 @@ public class Empleado extends Persona {
     private String address;
     private String phone;
     private String city;
-    private String state;
+    private boolean state;
     
     private static LinkedList<Empleado> employees = new LinkedList<>();
     
-    public Empleado(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber, String address, String phone, String city, String state) {
+    public Empleado(String name, String firstSurName, String secondSurName, byte age, String identification, String email, String department, String yearJoined, long wage, String profession, long employeeNumber, String address, String phone, String city, boolean state) {
         super(name, firstSurName, secondSurName, age, identification, email);
         this.department = department;
         this.yearJoined = yearJoined;
@@ -45,6 +46,8 @@ public class Empleado extends Persona {
     public static LinkedList<Empleado> getEmployee(String fileName) {
         Handler handler = new Handler();
         String fileContent = "";
+        
+        if (!employees.isEmpty()) return employees;
         
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -83,7 +86,7 @@ public class Empleado extends Persona {
                           + "|\n");
                 writer.close();
                 
-                employees.add(new Empleado("Ignacio", "Duarte", "Gómez", (byte) 34, "223456789876543", "ig124@gmail.com", "Finanzas", "2012", 1200000L, "Contador", 345676543L, "100 metros sur de la luna", "83944839", "Guadalajara", "ocupado"));
+                employees.add(new Empleado("Ignacio", "Duarte", "Gómez", (byte) 34, "223456789876543", "ig124@gmail.com", "Finanzas", "2012", 1200000L, "Contador", 345676543L, "100 metros sur de la luna", "83944839", "Guadalajara", true));
                 return employees;
                 
               } catch (IOException ex02) {
@@ -108,7 +111,7 @@ public class Empleado extends Persona {
             if (empleado.length < 6) continue;
             
             try {
-                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]), empleado[11], empleado[12], empleado[13], empleado[14])); 
+                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]), empleado[11], empleado[12], empleado[13], Boolean.parseBoolean(empleado[14]))); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
@@ -118,8 +121,15 @@ public class Empleado extends Persona {
     
     public static LinkedList<Empleado> addEmployee(Empleado empleado) {
         Handler handler = new Handler();
-        employees.add(empleado);
         
+        for (Empleado employee : employees) {
+            if (employee.getIdentification().equals(empleado.getIdentification())) {
+                handler.showMessage("La identificación ya está asignada a otro empleado", "Error", handler.ERROR);
+                return new LinkedList<>();
+            }
+        }
+        
+        employees.add(empleado);
         
         handler.showMessage("Datos guardados exitosamente", "Exito", handler.PLAIN);
         return employees;
@@ -137,6 +147,52 @@ public class Empleado extends Persona {
         }
         handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Exito", handler.PLAIN);
         return employees;
+    }
+    
+    public void safeEmployees(String fileName) {
+        Handler handler = new Handler();
+        
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            
+            //Completar guardado de datos
+            for (Empleado empleado : employees) {
+                writer.write("\n"
+                        + empleado.getIdentification() + "\n"
+                        + empleado.getName() + "\n"
+                        + empleado.getFirstSurName() + "\n"
+                        + empleado.getSecondSurName() + "\n"
+                        + empleado.getWage() + "\n"
+                        + empleado.getAge() + "\n"
+                        + empleado.getDepartment() + "\n"
+                        + empleado.getEmail() + "\n"
+                        + empleado.getYearJoined() + "\n"
+                        + empleado.getProfession() + "\n"
+                        + empleado.getEmployeeNumber() + "\n"
+                        + empleado.getAddress() + "\n"
+                        + empleado.getPhone() + "\n"
+                        + empleado.getCity() + "\n"
+                        + empleado.isState() + "\n"
+                        + "|\n");                
+            }
+            
+            writer.close();
+        } catch (IOException ex) {
+            handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);
+        }
+    }
+    
+    public static void toggleEmployeeState(String identification) {
+        Handler handler = new Handler();
+        for (Empleado empleado : employees) {
+            if (empleado.getIdentification().equals(identification)) {
+                empleado.setState(!empleado.isState());
+                handler.showMessage("Empleado " + (empleado.isState() ? "activado" : "desactivado"), "Usuario: " + empleado.getIdentification(), handler.INFORMATION);
+                return;
+            }
+        }
+        
+        handler.showMessage("Usuario no encontrado", "Error", handler.ERROR);
     }
     
     public String getDepartment() {
@@ -203,11 +259,11 @@ public class Empleado extends Persona {
         this.city = city;
     }
 
-    public String getState() {
+    public boolean isState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(boolean state) {
         this.state = state;
     }
 }

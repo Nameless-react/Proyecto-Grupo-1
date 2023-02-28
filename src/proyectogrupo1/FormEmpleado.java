@@ -19,17 +19,13 @@ public class FormEmpleado extends javax.swing.JFrame {
      * Creates new form FormEmpleado
      * @param type
      */
-    public FormEmpleado() {
-        initComponents();
-    }
-    
     public FormEmpleado(char type) {
         initComponents();
         this.type = type;
          
         setLocationRelativeTo(null);
         setTitle("Formulario");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
         
@@ -83,8 +79,6 @@ public class FormEmpleado extends javax.swing.JFrame {
         jTextField12 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(240, 240, 240));
@@ -145,17 +139,20 @@ public class FormEmpleado extends javax.swing.JFrame {
         });
 
         jTextField7.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 6, 7, 3));
+        jTextField7.setMaximumSize(new java.awt.Dimension(160, 2147483647));
 
         jTextField8.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 6, 7, 3));
 
         jTextField9.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 6, 7, 3));
 
         jTextField10.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 6, 7, 3));
+        jTextField10.setMaximumSize(new java.awt.Dimension(160, 2147483647));
 
         jButton1.setBackground(new java.awt.Color(98, 54, 255));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Enviar");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +177,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         jLabel13.setText("Dirección: ");
 
         jTextField11.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 6, 7, 3));
+        jTextField11.setMaximumSize(new java.awt.Dimension(160, 2147483647));
 
         jLabel14.setText("Teléfono: ");
 
@@ -188,10 +186,6 @@ public class FormEmpleado extends javax.swing.JFrame {
         jLabel15.setText("Ciudad: ");
 
         jTextField13.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 6));
-
-        jLabel16.setText("Estado: ");
-
-        jTextField14.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 6));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,22 +218,20 @@ public class FormEmpleado extends javax.swing.JFrame {
                                 .addComponent(jTextField5))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField11))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField10))
+                                        .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField12)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel13))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -249,21 +241,20 @@ public class FormEmpleado extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel11)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel16))
+                                            .addComponent(jLabel15))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                            .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,9 +313,7 @@ public class FormEmpleado extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -343,6 +332,7 @@ public class FormEmpleado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         checkData(); 
+        new Menu().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -351,6 +341,7 @@ public class FormEmpleado extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+        Menu.main();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
@@ -426,7 +417,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         }
         
         String address = jTextField11.getText();
-        if (address.length() < 6) {
+        if (address.length() < 3) {
             handler.showMessage("Dirección no valida", "Error", handler.ERROR);
             jTextField11.setText("");
             return;
@@ -439,24 +430,16 @@ public class FormEmpleado extends javax.swing.JFrame {
             return;
         }
         
-        String city = "";
+        String city = jTextField13.getText();
         if (city.length() < 2) {
             handler.showMessage("Ciudad no valida", "Error", handler.ERROR);
             jTextField13.setText("");
             return;
         }
         
-        
-        String states = "";
-        if (states.length() < 2) {
-            handler.showMessage("Estado no valido", "Error", handler.ERROR);
-            jTextField14.setText("");
-            return;
-        } 
-        
-        if (this.type == 'c') Empleado.addEmployee(new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, states));
+        if (this.type == 'c') Empleado.addEmployee(new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, true));
         else {
-            Empleado.editEmployee(identification, new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, states));
+            Empleado.editEmployee(identification, new Empleado(name, firstSurName, secondSurName, age, identification, email, department, yearJoined, wage, profession, employeeNumber, address, phone, city, true));
             this.dispose();
         }
         
@@ -482,7 +465,6 @@ public class FormEmpleado extends javax.swing.JFrame {
         jTextField11.setText("");
         jTextField12.setText("");
         jTextField13.setText("");
-        jTextField14.setText("");
     }
     
 
@@ -496,7 +478,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         } while (identification.length() < 8);
         
         
-        Empleado empleado = new Empleado("", "", "", (byte) 0, "", "", "", "", 0L, "", 0L, "", "", "", "");
+        Empleado empleado = new Empleado("", "", "", (byte) 0, "", "", "", "", 0L, "", 0L, "", "", "", true);
         
         for (int i = 0; i < employees.size(); i++) {
             if (identification.equals(this.employees.get(i).getIdentification())) {
@@ -528,8 +510,6 @@ public class FormEmpleado extends javax.swing.JFrame {
         jTextField11.setText(empleado.getAddress());
         jTextField12.setText(empleado.getPhone());
         jTextField13.setText(empleado.getCity());
-        jTextField14.setText(empleado.getState());
-        
     }
     /**
      * @param type
@@ -577,7 +557,6 @@ public class FormEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -592,7 +571,6 @@ public class FormEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
