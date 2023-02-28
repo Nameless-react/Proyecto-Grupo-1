@@ -13,5 +13,5 @@ Contador
 100 metros sur de la luna
 83944839
 Guadalajara
-ocupado
+true
 |

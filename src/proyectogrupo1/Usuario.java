@@ -98,10 +98,18 @@ public class Usuario extends Persona {
         return users;
     }
     
-    public static void Agregar(Usuario u){
+    public static List<Usuario> Agregar(Usuario u){
         Handler h = new Handler();
+        for (Usuario usuario : users) {
+            if (usuario.getIdentification().equals(u.getIdentification())) {
+                h.showMessage("La identificación ya pertenece a un usuario", "Error", h.ERROR);
+                return new ArrayList<>();
+            }
+        }
+        
         users.add(u);
         h.showMessage("Usuario agregado exitosamente!", "Exito", h.PLAIN);
+        return users;
     }
     
     
