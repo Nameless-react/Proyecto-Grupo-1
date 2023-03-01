@@ -5,6 +5,7 @@
 package proyectogrupo1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -61,6 +62,7 @@ public class Usuario extends Persona {
                             "Gera\n" +
                             "con\n" +
                             "24\n" +
+                            "gera1234@gmail.com\n" +
                             "true\n"
                           + "|\n");
                 writer.close();
@@ -108,13 +110,38 @@ public class Usuario extends Persona {
         }
         
         users.add(u);
-        h.showMessage("Usuario agregado exitosamente!", "Exito", h.PLAIN);
+        h.showMessage("Usuario agregado exitosamente!", "Exito", h.INFORMATION);
         return users;
     }
     
     
     
-
+    public static void safeUsers(String fileName) {
+        Handler handler = new Handler();
+        
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            
+            //Completar guardado de datos
+            for (Usuario usuario : users) {
+                writer.write("\n"
+                        + usuario.getIdentification() + "\n"
+                        + usuario.getName() + "\n"
+                        + usuario.getFirstSurName() + "\n"
+                        + usuario.getSecondSurName() + "\n"
+                        + usuario.getNickName() + "\n"
+                        + usuario.getPassword() + "\n"
+                        + usuario.getAge() + "\n"
+                        + usuario.getEmail() + "\n"
+                        + usuario.getState() + "\n"
+                        + "|");                
+            }
+            
+            writer.close();
+        } catch (IOException ex) {
+            handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);
+        }
+    }
     
     
     public String getPassword() {

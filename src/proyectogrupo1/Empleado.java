@@ -84,7 +84,9 @@ public class Empleado extends Persona {
                             "Guadalajara\n" +
                             "ocupado\n"
                           + "|\n");
-                writer.close();
+                writer.close(); 
+                
+                
                 
                 employees.add(new Empleado("Ignacio", "Duarte", "Gómez", (byte) 34, "223456789876543", "ig124@gmail.com", "Finanzas", "2012", 1200000L, "Contador", 345676543L, "100 metros sur de la luna", "83944839", "Guadalajara", true));
                 return employees;
@@ -131,7 +133,7 @@ public class Empleado extends Persona {
         
         employees.add(empleado);
         
-        handler.showMessage("Datos guardados exitosamente", "Exito", handler.PLAIN);
+        handler.showMessage("Datos guardados exitosamente", "Exito", handler.INFORMATION);
         return employees;
     }
     
@@ -141,19 +143,20 @@ public class Empleado extends Persona {
         for (int i = 0; i < employees.size(); i++) {
             if (identification.equals(employees.get(i).getIdentification())) {
                 employees.set(i, newEmpleado);
-                handler.showMessage("Datos actualizados correctamente", "Exito", handler.PLAIN);
+                handler.showMessage("Datos actualizados correctamente", "Exito", handler.INFORMATION);
                 return employees;
             }
         }
-        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Exito", handler.PLAIN);
+        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Exito", handler.INFORMATION);
         return employees;
     }
     
-    public void safeEmployees(String fileName) {
+    public static void safeEmployees(String fileName) {
         Handler handler = new Handler();
         
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+
             
             //Completar guardado de datos
             for (Empleado empleado : employees) {
@@ -163,8 +166,8 @@ public class Empleado extends Persona {
                         + empleado.getFirstSurName() + "\n"
                         + empleado.getSecondSurName() + "\n"
                         + empleado.getWage() + "\n"
-                        + empleado.getAge() + "\n"
                         + empleado.getDepartment() + "\n"
+                        + empleado.getAge() + "\n"
                         + empleado.getEmail() + "\n"
                         + empleado.getYearJoined() + "\n"
                         + empleado.getProfession() + "\n"
@@ -173,9 +176,9 @@ public class Empleado extends Persona {
                         + empleado.getPhone() + "\n"
                         + empleado.getCity() + "\n"
                         + empleado.isState() + "\n"
-                        + "|\n");                
+                        + "|");               
             }
-            
+
             writer.close();
         } catch (IOException ex) {
             handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);
@@ -183,16 +186,18 @@ public class Empleado extends Persona {
     }
     
     public static void toggleEmployeeState(String identification) {
+        //Verificar si se puede bloquear el empleado dependiendo de las especificaciones del proyecto
+        
         Handler handler = new Handler();
         for (Empleado empleado : employees) {
             if (empleado.getIdentification().equals(identification)) {
                 empleado.setState(!empleado.isState());
-                handler.showMessage("Empleado " + (empleado.isState() ? "activado" : "desactivado"), "Usuario: " + empleado.getIdentification(), handler.INFORMATION);
+                handler.showMessage("Empleado " + (empleado.isState() ? "activado" : "desactivado"), "Empleado: " + empleado.getIdentification(), handler.INFORMATION);
                 return;
             }
         }
         
-        handler.showMessage("Usuario no encontrado", "Error", handler.ERROR);
+        handler.showMessage("Empleado no encontrado", "Error", handler.ERROR);
     }
     
     public String getDepartment() {
