@@ -39,4 +39,8 @@ public class Handler {
     public long inputLong(String message) {
         return Long.parseLong(JOptionPane.showInputDialog(null, message));
     }
+    
+    public String capitalize(String text) {
+        return text.substring(0,1).toUpperCase() + text.substring(1, text.length());
+    }
 }

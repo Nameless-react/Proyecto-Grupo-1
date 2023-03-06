@@ -83,7 +83,6 @@
                                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jSpinner1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextField6" max="32767" attributes="0"/>

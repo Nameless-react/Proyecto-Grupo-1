@@ -13,8 +13,6 @@ import javax.swing.JFrame;
  */
 public class Agregar extends javax.swing.JFrame {
     
-    
-    
     /**
      * Creates new form Agregar
      */
@@ -29,6 +27,8 @@ public class Agregar extends javax.swing.JFrame {
     }
     
     public void AgregarU(){
+        Handler handler = new Handler();
+        
         String name = "";
         String firstSurName = "";
         String secondSurName = "";
@@ -42,9 +42,9 @@ public class Agregar extends javax.swing.JFrame {
         Usuario u=new Usuario(name,  firstSurName,  secondSurName,  age,  identification,  email,  password,  state,  nickName);
          
          u.setEmail(jTextField9.getText());
-         u.setName(jTextField1.getText());
-         u.setFirstSurName(jTextField4.getText());
-         u.setSecondSurName(jTextField6.getText());
+         u.setName(handler.capitalize(jTextField1.getText()));
+         u.setFirstSurName(handler.capitalize(jTextField4.getText()));
+         u.setSecondSurName(handler.capitalize(jTextField6.getText()));
          u.setAge(Byte.parseByte((String) jSpinner1.getValue()));
          u.setIdentification(jTextField7.getText());
          u.setNickName(jTextField5.getText());

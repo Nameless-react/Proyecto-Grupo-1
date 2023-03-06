@@ -5,7 +5,6 @@
 package proyectogrupo1;
 
 import java.awt.Color;
-import java.util.LinkedList;
 import javax.swing.JFrame;
 
 /**
@@ -14,28 +13,27 @@ import javax.swing.JFrame;
  */
 public class FormEmpleado extends javax.swing.JFrame {
     public char type;
-    private LinkedList<Empleado> employees = Empleado.getEmployee("empleados.txt");
     /**
      * Creates new form FormEmpleado
      * @param type
      */
     public FormEmpleado(char type) {
-        initComponents();
         this.type = type;
+        initComponents();
          
         setLocationRelativeTo(null);
         setTitle("Formulario");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
+       
         
-        Empleado.addEmployee(new Empleado("Joel", "García", "Rojas", (byte) 19, "118930275", "joel33960@gmail.com", "IT", "2022", 4000000L, "Ingeniero en sistemas", 2345678456L, "1150 metros sur de la estrella de la muerte", "83962643", "Corusant", true));
         jLabel2.setText(this.type == 'c' ?  "Agregar Empleado" : "Editar Empleado");
         jButton1.setText(this.type == 'c' ? "Enviar" : "Guardar");
         
         if (this.type != 'c') {
             jTextField4.setEditable(false);
-            selectedEmployee();
+            this.selectedEmployee();
         }
     }
 
@@ -331,8 +329,7 @@ public class FormEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        checkData(); 
-        new Menu().setVisible(true);
+        checkData();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -347,16 +344,27 @@ public class FormEmpleado extends javax.swing.JFrame {
     public void checkData() {
         Handler handler = new Handler();
         
-        String name = jTextField1.getText();
+        String name = handler.capitalize(jTextField1.getText());
         if (name.length() < 3) {
             handler.showMessage("Nombre no valido", "Error", handler.ERROR);
             jTextField1.setText("");
             return;
         }
         
-        String firstSurName = jTextField2.getText();
-        String secondSurName = jTextField3.getText();
+        String firstSurName = handler.capitalize(jTextField2.getText());
+        if (firstSurName.length() < 3) {
+            handler.showMessage("Primer apellido no valido", "Error", handler.ERROR);
+            jTextField2.setText("");
+            return;
+        }
         
+        
+        String secondSurName = handler.capitalize(jTextField3.getText());
+        if (secondSurName.length() < 3) {
+            handler.showMessage("Segundo apellido no valido", "Error", handler.ERROR);
+            jTextField3.setText("");
+            return;
+        }
         
         byte age = 0;
         try {
@@ -472,16 +480,16 @@ public class FormEmpleado extends javax.swing.JFrame {
         
         String identification = "";
         do {
-            identification = handler.inputString("Digite la identificación del empleado");
+            identification = handler.inputString("Digite la identificación del empleado").trim();
             if (identification == null) identification = "";
         } while (identification.length() < 8);
         
         
         Empleado empleado = new Empleado("", "", "", (byte) 0, "", "", "", "", 0L, "", 0L, "", "", "", true);
         
-        for (int i = 0; i < employees.size(); i++) {
-            if (identification.equals(this.employees.get(i).getIdentification())) {
-                empleado = this.employees.get(i);
+        for (int i = 0; i < Empleado.getEmployee("empleados.txt").size(); i++) {
+            if (identification.equals(Empleado.getEmployee("empleados.txt").get(i).getIdentification())) {
+                empleado = Empleado.getEmployee("empleados.txt").get(i);
                 break;
             }
         }

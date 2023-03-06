@@ -65,9 +65,7 @@ public class Empleado extends Persona {
             if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {
               
               try {
-                  File file = new File(fileName);
-                  file.createNewFile();
-                  FileWriter writer = new FileWriter(fileName);
+                  BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
                   writer.write("\n2223456789876543\n" +
                             "Ignacio\n" +
                             "Duarte\n" +
@@ -82,8 +80,8 @@ public class Empleado extends Persona {
                             "100 metros sur de la luna\n" +
                             "83944839\n" +
                             "Guadalajara\n" +
-                            "ocupado\n"
-                          + "|\n");
+                            "true\n"
+                          + "|");
                 writer.close(); 
                 
                 
@@ -113,7 +111,7 @@ public class Empleado extends Persona {
             if (empleado.length < 6) continue;
             
             try {
-                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]), empleado[11], empleado[12], empleado[13], Boolean.parseBoolean(empleado[14]))); 
+                employees.add(new Empleado(empleado[1], empleado[2], empleado[3], Byte.parseByte(empleado[6]), empleado[0], empleado[7], empleado[5], empleado[8], Long.parseLong(empleado[4]), empleado[9], Long.parseLong(empleado[10]), empleado[11], empleado[12], empleado[13], empleado[14].equals("true"))); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
@@ -126,7 +124,7 @@ public class Empleado extends Persona {
         
         for (Empleado employee : employees) {
             if (employee.getIdentification().equals(empleado.getIdentification())) {
-                handler.showMessage("La identificación ya está asignada a otro empleado", "Error", handler.ERROR);
+                handler.showMessage("La identificación ya está asignada aL otro empleado", "Error", handler.ERROR);
                 return new LinkedList<>();
             }
         }
@@ -156,11 +154,11 @@ public class Empleado extends Persona {
         
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-
+            String data = "";
             
-            //Completar guardado de datos
+            
             for (Empleado empleado : employees) {
-                writer.write("\n"
+                data += "\n"
                         + empleado.getIdentification() + "\n"
                         + empleado.getName() + "\n"
                         + empleado.getFirstSurName() + "\n"
@@ -176,9 +174,10 @@ public class Empleado extends Persona {
                         + empleado.getPhone() + "\n"
                         + empleado.getCity() + "\n"
                         + empleado.isState() + "\n"
-                        + "|");               
+                        + "|";               
             }
-
+            
+            writer.write(data);
             writer.close();
         } catch (IOException ex) {
             handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);

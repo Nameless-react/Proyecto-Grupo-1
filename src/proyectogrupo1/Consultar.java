@@ -28,8 +28,14 @@ public class Consultar extends javax.swing.JFrame {
     }
     
     public void enviarConsulta(){
-        identification = jTextField3.getText();
         Handler h = new Handler();
+        identification = jTextField3.getText();
+        
+        if (identification.length() < 8) {
+           h.showMessage("La número de identificación no valido", "Error",h.ERROR);
+           return;
+        }
+        
         List<Usuario> users = Usuario.getUsers("usuarios.txt");
         
         
@@ -151,7 +157,6 @@ public class Consultar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         enviarConsulta();
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -52,9 +52,8 @@ public class Usuario extends Persona {
             if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {
               
               try {
-                  File file = new File(fileName);
-                  file.createNewFile();
-                  FileWriter writer = new FileWriter(fileName);
+                  
+                  BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
                   writer.write("\n234567873456\n" +
                             "Gerardo\n" +
                             "Escamilla\n" +
@@ -92,7 +91,7 @@ public class Usuario extends Persona {
             if (usuario.length < 6) continue;
             
             try {
-                users.add(new Usuario(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[7], usuario[5], Boolean.parseBoolean(usuario[8]), usuario[4])); 
+                users.add(new Usuario(usuario[1], usuario[2], usuario[3], Byte.parseByte(usuario[6]), usuario[0], usuario[7], usuario[5], usuario[8].equals("true"), usuario[4])); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
             }
@@ -121,10 +120,9 @@ public class Usuario extends Persona {
         
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            
-            //Completar guardado de datos
+            String data = "";
             for (Usuario usuario : users) {
-                writer.write("\n"
+                data += "\n"
                         + usuario.getIdentification() + "\n"
                         + usuario.getName() + "\n"
                         + usuario.getFirstSurName() + "\n"
@@ -134,9 +132,10 @@ public class Usuario extends Persona {
                         + usuario.getAge() + "\n"
                         + usuario.getEmail() + "\n"
                         + usuario.getState() + "\n"
-                        + "|");                
+                        + "|";                
             }
             
+            writer.write(data);
             writer.close();
         } catch (IOException ex) {
             handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);

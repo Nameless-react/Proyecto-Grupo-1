@@ -1,11 +1,11 @@
 
-2223456789876543
+223456789876543
 Ignacio
 Duarte
 Gómez
 1200000
 Finanzas
-24
+34
 ig124@gmail.com
 2012
 Contador
@@ -28,6 +28,6 @@ Ingeniero en sistemas
 2345678456
 1150 metros sur de la estrella de la muerte
 83962643
-Corusant
+Kamino
 true
 |
