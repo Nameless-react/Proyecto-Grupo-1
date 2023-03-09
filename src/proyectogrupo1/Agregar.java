@@ -39,13 +39,13 @@ public class Agregar extends javax.swing.JFrame {
         boolean state = true;
         String nickName = "";
         
-        Usuario u=new Usuario(name,  firstSurName,  secondSurName,  age,  identification,  email,  password,  state,  nickName);
+        Usuario u = new Usuario(name,  firstSurName,  secondSurName,  age,  identification,  email,  password,  state,  nickName);
          
          u.setEmail(jTextField9.getText());
          u.setName(handler.capitalize(jTextField1.getText()));
          u.setFirstSurName(handler.capitalize(jTextField4.getText()));
          u.setSecondSurName(handler.capitalize(jTextField6.getText()));
-         u.setAge(Byte.parseByte((String) jSpinner1.getValue()));
+         u.setAge(Byte.parseByte(String.valueOf(jSpinner1.getValue())));
          u.setIdentification(jTextField7.getText());
          u.setNickName(jTextField5.getText());
          
