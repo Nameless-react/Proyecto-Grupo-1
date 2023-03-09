@@ -141,6 +141,18 @@ public class Usuario extends Persona {
             handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);
         }
     }
+    public static void toggleUserState(String Identification){
+         
+        Handler handler = new Handler();
+        for(Usuario usuario: users){
+            if(Usuario.getUsers(Identification).equals(Identification) ){
+                usuario.setState(!usuario.getState());
+                handler.showMessage("Se cambio correctamente el estado de usuario.", "Usuario: "+usuario.getIdentification(), handler.INFORMATION);
+                
+            }
+        }
+        handler.showMessage("El usuario no fue encontrado", "Error", handler.ERROR);
+    }
     
     
     public String getPassword() {
