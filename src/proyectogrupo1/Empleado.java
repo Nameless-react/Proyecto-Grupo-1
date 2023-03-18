@@ -40,6 +40,7 @@ public class Empleado extends Persona {
         this.phone = phone;
         this.city = city;
         this.state = state;
+        
     }
 
     

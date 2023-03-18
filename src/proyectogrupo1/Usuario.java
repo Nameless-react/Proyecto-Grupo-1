@@ -22,7 +22,7 @@ public class Usuario extends Persona {
     private boolean state;
     private String nickName;
     private static List<Usuario> users = new ArrayList<>();
-    
+////    
     public Usuario (String name, String firstSurName, String secondSurName, byte age, String identification, String email, String password, boolean state, String nickName) {
         super(name, firstSurName, secondSurName, age, identification, email);
         this.password = password;
