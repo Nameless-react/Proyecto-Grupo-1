@@ -159,7 +159,7 @@ public class FormEmpleado extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(223, 218, 217));
-        jButton2.setText("<<Atras");
+        jButton2.setText("<<Atrás");
         jButton2.setBorder(jButton1.getBorder());
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);

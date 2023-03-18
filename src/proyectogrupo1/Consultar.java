@@ -21,7 +21,7 @@ public class Consultar extends javax.swing.JFrame {
     public Consultar() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Formulario");
+        setTitle("Consulta");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));

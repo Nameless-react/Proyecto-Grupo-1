@@ -18,6 +18,3 @@ public class Main {
     }
     
 }
-
-//https://www.upgrad.com/blog/runnable-interface-in-java/
-//https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiQra6njbb9AhUFRTABHWS3BoQQFnoECA4QAw&url=https%3A%2F%2Fcrunchingthedata.com%2Fpython-init-file%2F&usg=AOvVaw3npFkgdfrB3fYlgqKjq8uB

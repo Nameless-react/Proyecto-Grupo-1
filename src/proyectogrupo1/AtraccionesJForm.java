@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyectogrupo1;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import static proyectogrupo1.Atraccion.atracciones;
+import java.awt.Color;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,60 +13,60 @@ import static proyectogrupo1.Atraccion.atracciones;
 public class AtraccionesJForm extends javax.swing.JFrame {
     
     public char tipo;
-    
+    public String nombreAtraccion = "";
     
     public AtraccionesJForm(char tipo){
-        this.tipo=tipo;  
+        this.tipo = tipo;  
+        initComponents();
+        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias()) {
+            jComboBox1.addItem(categoria.getCategoria());
+        }
         
-        initComponents();
-        EditarAtraccion();
-       
+        
+        setLocationRelativeTo(null);
+        setTitle("Formulario Atracciones");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setBackground(new Color(0xF0F0F0));
+        
+        jButton1.setText(tipo == 'c' ? "Enviar" : "Editar");
+        
+        if (tipo != 'c') {      
+            
+            editarAtraccion();
+        }
     }
     
-    public AtraccionesJForm(){
-        initComponents();
-    }
     
     
-    public void EditarAtraccion() {
+    public void editarAtraccion() {
         Handler handler = new Handler();
         
-        String NAtraccion = "";
+        
         do {
-            NAtraccion = handler.inputString("Digite el nombre de la atraccion").trim();
-            if (NAtraccion == null) NAtraccion = "";
-        } while (NAtraccion.length() < 1);
+            this.nombreAtraccion = handler.inputString("Digite el nombre de la atraccion").trim();
+            if (this.nombreAtraccion == null) this.nombreAtraccion = "";
+        } while (this.nombreAtraccion.length() < 1);
         
         
         Atraccion defaultAtracciones = new Atraccion();
         
-        for (int i = 0; i < atracciones.size(); i++) {
-            if (NAtraccion.equals(atracciones.get(i).getNAtraccion())) {
-                defaultAtracciones = atracciones.get(i);
-                
+        for (int i = 0; i < Atraccion.getAtracciones("atracciones.txt").size(); i++) {
+            if (this.nombreAtraccion.equals(Atraccion.getAtracciones("atracciones.txt").get(i).getNombreAtraccion())) {
+                defaultAtracciones = Atraccion.getAtracciones("atracciones.txt").get(i);
                 break;
             }
         }
         
         
         
-        if (defaultAtracciones.getNAtraccion().isEmpty()) handler.showMessage("Atraccion no encontrada: 404", "Error", handler.ERROR);
+        if (defaultAtracciones.getNombreAtraccion().isEmpty()) handler.showMessage("Atraccion no encontrada: 404", "Error", handler.ERROR);
         
-        jTextField1.setText(defaultAtracciones.getCat());
-        jTextField2.setText(defaultAtracciones.getNAtraccion());
-        jTextField3.setText(defaultAtracciones.getEmp());
-        
-        
+        jComboBox1.setSelectedItem(defaultAtracciones.getCat());
+        jTextField2.setText(defaultAtracciones.getNombreAtraccion());
+        jTextField3.setText(defaultAtracciones.getEmpleado());
         
     }
-    
-    
-    
-
-    
-    
-    
-    
 
 
     /**
@@ -87,9 +85,8 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +94,20 @@ public class AtraccionesJForm extends javax.swing.JFrame {
             }
         });
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Enviar solicitud de atracción");
+        jButton1.setBackground(new java.awt.Color(98, 54, 255));
+        jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Enviar");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -114,7 +118,26 @@ public class AtraccionesJForm extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese la categoria de la atracción:");
 
-        jLabel3.setText("Ingrese la identificacion del empleado encargado de la atraccion");
+        jLabel3.setText("Ingrese la identificación del empleado encargado de la atracción:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(240, 240, 240));
+        jButton2.setText("<<Atrás");
+        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,43 +146,55 @@ public class AtraccionesJForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel2)
+                                .addGap(9, 9, 9)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(79, 79, 79))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(22, 22, 22)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(50, 50, 50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -174,19 +209,48 @@ public class AtraccionesJForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(tipo=='e'){
-            
-            Atraccion.editAtracc(jTextField2.getText() , new Atraccion(jTextField2.getText(),jTextField1.getText(), jTextField3.getText(), true));
+        Handler handler = new Handler();
+        String nombreAtraccionFormulario = jTextField2.getText();
+        String categoriaFormulario = String.valueOf(jComboBox1.getSelectedItem());
+        String identificacionEmpleado = jTextField3.getText();
+
+        
+        if (tipo != 'c') {
+            Atraccion.editAtraccion(this.nombreAtraccion, new Atraccion(nombreAtraccionFormulario, categoriaFormulario, identificacionEmpleado, true));
             this.dispose();
             return;
         }
-       Atraccion.verificarCat(jTextField1.getText());
-       Atraccion.verificarNAtraciones(jTextField2.getText());
-       Atraccion.verificarEmpleado(jTextField3.getText());
-       Atraccion.crearAtraccion(jTextField2.getText(), jTextField1.getText(), jTextField3.getText());
-               
-        this.dispose();
+        
+        for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
+            if (nombreAtraccionFormulario.equals(atraccion.getNombreAtraccion())) {
+                handler.showMessage("Ya existe una atracción con ese nombre, por favor intente de nuevo", "Error", handler.ERROR);
+                return;
+            }
+        }
+        
+        
+         for (Empleado employee : Empleado.getEmployee("empleados.txt")) {  
+            if(employee.getIdentification().equals(identificacionEmpleado) && !employee.isState()){
+                handler.showMessage("El empleado no está disponible", "Informacion", handler.ERROR);
+                return;
+            } 
+        }
+        
+        
+       Atraccion.crearAtraccion(nombreAtraccionFormulario, categoriaFormulario, identificacionEmpleado);
+       
+       jComboBox1.setSelectedIndex(0);
+       jTextField2.setText("");
+       jTextField3.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,13 +282,15 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AtraccionesJForm().setVisible(true);
+                new AtraccionesJForm('c').setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

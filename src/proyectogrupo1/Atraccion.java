@@ -11,98 +11,68 @@ import java.util.LinkedList;
  * @author Daniel Lopez
  */
 public class Atraccion {
+    private static LinkedList<Atraccion> atracciones = new LinkedList<>();
+    private String nombreAtraccion = "";
+    private String cat = "";
+    private String empleado = "";
+    private boolean state;
     
     
-    public static LinkedList<Atraccion> atracciones=new LinkedList<>();
-    String NAtraccion="";
-    String Cat="";
-    String Emp="";
-    boolean state=true;
-    Handler handler = new Handler();
-    char tipo=' ';
-    
-    
-    public Atraccion (String NAtraccion, String Cat, String Emp, boolean state){
-        
-        this.NAtraccion=NAtraccion;
-        this.Cat=Cat;
-        this.Emp=Emp;
-        this.state=true;
+    public Atraccion (String nombreAtraccion, String cat, String empleado, boolean state) {
+        this.nombreAtraccion = nombreAtraccion;
+        this.cat = cat;
+        this.empleado = empleado;
+        this.state = true;
         
     }
     
-    public Atraccion(){
-        
+    public Atraccion() {}
+    
+    //Refactorizar
+    public static LinkedList<Atraccion> getAtracciones(String fileName) {
+        return atracciones;
     }
+    
+    
     
     //metodo que verifica si existe la categoria
-    public static void verificarCat(String Cat){
-        Handler handler=new Handler();
-            for (categoriasAtracciones Categoria : categoriasAtracciones.Categoria) {
-                if(Categoria.getCate().equals(Cat)){
-                    handler.showMessage("La categoria esta correcta!", "Categoria asignada exitosamente", handler.INFORMATION);
-                    
-                }else{
-                    handler.showMessage("La categoria no existe!", "Rrror", handler.ERROR);
-                    return;
-                }
-        }
-
-
+    public static boolean verificarCat(String categoriaCreada) {
+        Handler handler = new Handler();
         
-    }
-    //Metodo que verifica si existe ya ese nombre de atraccion dentro del LinkedList
-    public static void verificarNAtraciones (String NAtraccion){
-        Handler handler=new Handler();
-        if (atracciones==null){
-            
-            handler.showMessage("El nombre de la atraccion esta disponible!", "Informacion", handler.INFORMATION);
-        }else if(atracciones!=null){
-            
-            for (Atraccion atraccion : atracciones) {
-                if(atraccion.getNAtraccion().equals(NAtraccion)){
-                    handler.showMessage("El nombre no se encuentra disponible", "Error", handler.ERROR);
-                    return;
-                }
-        }
-        }
+        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias()) {
+            if(categoria.getCategoria().equals(categoriaCreada)) return true;
+        }    
+        
+        handler.showMessage("La categoria no existe", "Error", handler.ERROR);
+        return false;
     }
     
-    //metodo que verifica si existe el empleado
-    public static void verificarEmpleado(String Emp){
-//        Se busca el empleado por la cedula
-        Handler handler=new Handler();
-        for (Empleado employees : Empleado.getEmployee("empleados.txt")) {  
-            if(employees.getIdentification().equals(Emp)){
-                handler.showMessage("El empleado esta disponible", "Informacion", handler.INFORMATION);
-                return;
-            }
-          
-        }
-        handler.showMessage("El empleado no existe", "Error", handler.ERROR);
-                return;
-    }
-    public static void crearAtraccion(String NAtraccion, String Cat ,String Emp ){
-       
-        Atraccion a=new Atraccion(NAtraccion, Cat, Emp, true);
-        atracciones.add(a);
+    
+    public static void crearAtraccion(String nombreAtraccion, String categoriaCreada, String identificacionEmpleado){
+        Handler handler = new Handler();
+        
+        boolean continuar = verificarCat(categoriaCreada);
+        if(!continuar) return;
+        
+        atracciones.add(new Atraccion(nombreAtraccion, categoriaCreada, identificacionEmpleado, true));
+        handler.showMessage("Atracción creada existosamente", "Exito", handler.INFORMATION);
         
     }
     
     // Metodo para editar estado de la atraccion
-    public static void cambiarStateAtracc(String NAtraccion) {
+    public static void cambiarEstadoAtraccion(String nombreAtraccion) {
         
         
         Handler handler = new Handler();
         for (Atraccion atraccion : atracciones) {
-            if (atraccion.getNAtraccion()==NAtraccion) {
+            if (atraccion.getNombreAtraccion().equals(nombreAtraccion)) {
                 atraccion.setState(!atraccion.isState());
-                handler.showMessage("La atraccion " + (atraccion.isState() ? "activado" : "desactivado"), "Empleado: " + atraccion.getNAtraccion(), handler.INFORMATION);
+                handler.showMessage("La atracción " + (atraccion.isState() ? "activado" : "desactivado"), "Atracción: " + atraccion.getNombreAtraccion(), handler.INFORMATION);
                 return;
             }
         }
         
-        handler.showMessage("Atraccion no encontrada", "Error", handler.ERROR);
+        handler.showMessage("Atracción no encontrada", "Error", handler.ERROR);
     }
     
     
@@ -113,58 +83,44 @@ public class Atraccion {
     
     
     //metodo para editar atracciones
-    public static LinkedList<Atraccion> editAtracc(String NAtraccion, Atraccion newNAtraccion) {
+    public static LinkedList<Atraccion> editAtraccion(String nombreAtraccion, Atraccion newAtraccion) {
         Handler handler = new Handler();
         
         for (int i = 0; i < atracciones.size(); i++) {
-            if (NAtraccion.equals(atracciones.get(i).getNAtraccion())) {
-                atracciones.set(i, newNAtraccion);
-                handler.showMessage("Nombre actualizado correctamente", "Informacion", handler.INFORMATION);
+            
+            if (nombreAtraccion.equals(atracciones.get(i).getNombreAtraccion())) {
+                atracciones.set(i, newAtraccion);
+                handler.showMessage("Datos actualizados correctamente", "Información", handler.INFORMATION);
                 return atracciones;
             }
         }
-        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Error", handler.INFORMATION);
+        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Error", handler.ERROR);
         return atracciones;
     }
     
-    
-    
-    
-    
-    
-    
-    
 
-    public LinkedList<Atraccion> getAtracciones() {
-        return atracciones;
+    public String getNombreAtraccion() {
+        return nombreAtraccion;
     }
 
-    public void setAtraccion(LinkedList<Atraccion> atracciones) {
-        this.atracciones = atracciones;
-    }
-
-    public String getNAtraccion() {
-        return NAtraccion;
-    }
-
-    public void setNAtraccion(String NAtraccion) {
-        this.NAtraccion = NAtraccion;
+    public void setNombreAtraccion(String nombreAtraccion) {
+        this.nombreAtraccion = nombreAtraccion;
     }
 
     public String getCat() {
-        return Cat;
+        return cat;
     }
 
-    public void setCat(String Cat) {
-        this.Cat = Cat;
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 
-    public String getEmp() {
-        return Emp;
+    public String getEmpleado() {
+        return empleado;
     }
 
-    public void setEmp(String Empleado) {
-        this.Emp = Empleado;
+    public void setEmpleado(String empleado) {
+        this.empleado = empleado;
     }
 
     public boolean isState() {
