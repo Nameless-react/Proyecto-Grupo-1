@@ -125,7 +125,7 @@ public class Empleado extends Persona {
         
         for (Empleado employee : employees) {
             if (employee.getIdentification().equals(empleado.getIdentification())) {
-                handler.showMessage("La identificación ya está asignada aL otro empleado", "Error", handler.ERROR);
+                handler.showMessage("La identificación ya está asignada a otro empleado, por favor vuelva a intentarlo", "Error", handler.ERROR);
                 return new LinkedList<>();
             }
         }
@@ -142,11 +142,11 @@ public class Empleado extends Persona {
         for (int i = 0; i < employees.size(); i++) {
             if (identification.equals(employees.get(i).getIdentification())) {
                 employees.set(i, newEmpleado);
-                handler.showMessage("Datos actualizados correctamente", "Exito", handler.INFORMATION);
+                handler.showMessage("Datos fueron actualizados correctamente", "Exito", handler.INFORMATION);
                 return employees;
             }
         }
-        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Exito", handler.INFORMATION);
+        handler.showMessage("Los datos no fueron actualizados, por favor vuelva a intentarlo", "Error", handler.INFORMATION);
         return employees;
     }
     
@@ -186,7 +186,7 @@ public class Empleado extends Persona {
     }
     
     public static void toggleEmployeeState(String identification) {
-        //Verificar si se puede bloquear el empleado dependiendo de las especificaciones del proyecto
+        //Verificar si se puede bloquear el empleado dependiendo si está relacionado con el catalogo de atracciones del proyecto
         
         Handler handler = new Handler();
         for (Empleado empleado : employees) {
