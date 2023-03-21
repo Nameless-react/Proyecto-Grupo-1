@@ -4,6 +4,11 @@
  */
 package proyectogrupo1;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -28,8 +33,68 @@ public class Atraccion {
     
     public Atraccion() {}
     
-    //Refactorizar
+    
     public static LinkedList<Atraccion> getAtracciones(String fileName) {
+        Handler handler = new Handler();
+        String fileContent = "";
+        
+        if (!atracciones.isEmpty()) return atracciones;
+        
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        
+            
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                fileContent += line + "\n";
+            }
+        
+            bufferedReader.close();
+        
+        } catch (IOException ex01) {
+            
+            if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {
+              
+              try {
+                  BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+                  writer.write("\nEl martillo\n" +
+                            "Montañas Rusas\n" +
+                            "2223456789876543\n" +
+                            "true\n" +
+                            "|");
+                writer.close(); 
+                
+                
+                
+                atracciones.add(new Atraccion("El martillo", "Montañas Rusas", "n2223456789876543", true));
+                return atracciones;
+                
+              } catch (IOException ex02) {
+                  handler.showMessage("Error al crear archivo: " + ex02.getMessage(), "Error", handler.ERROR);
+                  return new LinkedList<>();
+              }
+            }
+            
+            
+            
+            
+            handler.showMessage("Error al leer el archivo: " + ex01.getMessage(), "Error", handler.ERROR);
+            return new LinkedList<>();
+        }
+        
+        
+        
+        String[] fileContentList = fileContent.split("\\|");
+       
+        for (String element : fileContentList) {
+            String[] atraccion = element.trim().split("\n");
+            if (atraccion.length < 6) continue;
+            try {
+                atracciones.add(new Atraccion(atraccion[0], atraccion[1], atraccion[2], atraccion[3].equals("true"))); 
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                handler.showMessage("Error en la conversión de datos: " + e.getMessage(), "Error", handler.ERROR);
+            }
+        }
         return atracciones;
     }
     
