@@ -234,6 +234,13 @@ public class AtraccionesJForm extends javax.swing.JFrame {
                 handler.showMessage("El empleado no está disponible", "Informacion", handler.ERROR);
                 return;
             } 
+            
+            for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
+                if (atraccion.getEmpleado().equals(identificacionEmpleado)) {
+                    handler.showMessage("El empleado ya está asignado a otra atracción", "Información", handler.ERROR);
+                    return;
+                }
+            }
         }
         
         

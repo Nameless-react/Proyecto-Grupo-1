@@ -88,7 +88,7 @@ public class Atraccion {
        
         for (String element : fileContentList) {
             String[] atraccion = element.trim().split("\n");
-            if (atraccion.length < 6) continue;
+            if (atraccion.length < 2) continue;
             try {
                 atracciones.add(new Atraccion(atraccion[0], atraccion[1], atraccion[2], atraccion[3].equals("true"))); 
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -126,11 +126,20 @@ public class Atraccion {
     
     // Metodo para editar estado de la atraccion
     public static void cambiarEstadoAtraccion(String nombreAtraccion) {
-        
-        
         Handler handler = new Handler();
+        //cambiar el estado dependiendo del empleado enlazado
+       
+        
         for (Atraccion atraccion : atracciones) {
             if (atraccion.getNombreAtraccion().equals(nombreAtraccion)) {
+                for (Empleado empleado : Empleado.getEmployee("empleados.txt")) {
+                    if (atraccion.getEmpleado().equals(empleado.getIdentification())) {
+                        handler.showMessage("La atracción tiene un empleado relacionado", "Información", handler.ERROR);
+                        return;
+                    }
+                }   
+        
+                
                 atraccion.setState(!atraccion.isState());
                 handler.showMessage("La atracción " + (atraccion.isState() ? "activado" : "desactivado"), "Atracción: " + atraccion.getNombreAtraccion(), handler.INFORMATION);
                 return;
