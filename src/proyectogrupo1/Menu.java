@@ -9,6 +9,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -16,9 +18,16 @@ import javax.swing.JFrame;
  * @author joel
  */
 public class Menu extends javax.swing.JFrame implements Runnable {
-    public final String HOST = "localhost";
-    public final int PORT = 5500;
-
+    private final String HOST = "localhost";
+    private final int PORT = 5500;
+    
+    private DataInputStream input;
+    private DataOutputStream output;
+    private Socket sc;
+    
+    private long ingresosDiarios = 0;
+    private List<Usuario> clientesIngresados = new ArrayList<>();
+    
     /**
      * Creates new form Menu
      */
@@ -278,12 +287,20 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Handler handler = new Handler();
         Empleado.safeEmployees("empleados.txt");
         Usuario.safeUsers("usuarios.txt");
+        
+        try {
+            output.writeInt(3);
+            sc.close();
+        } catch (IOException ex) {
+            handler.showMessage("Error al cerrar la conexión con el servidor: " + ex.getMessage(), "Error", handler.ERROR);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new Agregar().setVisible(true);
+        new Agregar(output).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -369,15 +386,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Handler handler = new Handler();
         
         try {
-            Socket sc = new Socket(HOST, PORT);
-            DataInputStream input = new DataInputStream(sc.getInputStream());
-            DataOutputStream output = new DataOutputStream(sc.getOutputStream());
-            
-            
-            
-            sc.close();
-            
-            
+            sc = new Socket(HOST, PORT);
+            input = new DataInputStream(sc.getInputStream());
+            output = new DataOutputStream(sc.getOutputStream());
         } catch (IOException ex) {
             handler.showMessage("Error en la conexión: " + ex.getMessage(), "Error", handler.ERROR);
         }

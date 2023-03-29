@@ -5,6 +5,9 @@
 package proyectogrupo1;
 
 import java.awt.Color;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 /**
@@ -12,11 +15,11 @@ import javax.swing.JFrame;
  * @author Daniel Lopez
  */
 public class Agregar extends javax.swing.JFrame {
-    
+    private DataOutputStream output;
     /**
      * Creates new form Agregar
      */
-    public  Agregar() {
+    public Agregar() {
         initComponents();
         
         setLocationRelativeTo(null);
@@ -24,6 +27,19 @@ public class Agregar extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
+    }
+    
+    public Agregar(DataOutputStream output) {
+        initComponents();
+        this.output = output;
+        
+        
+        setLocationRelativeTo(null);
+        setTitle("Formulario");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setBackground(new Color(0xF0F0F0));
+        
     }
     
     public void AgregarU(){
@@ -39,6 +55,7 @@ public class Agregar extends javax.swing.JFrame {
         boolean state = true;
         String nickName = "";
         
+        
         Usuario u = new Usuario(name,  firstSurName,  secondSurName,  age,  identification,  email,  password,  state,  nickName);
          
          u.setEmail(jTextField9.getText());
@@ -52,6 +69,22 @@ public class Agregar extends javax.swing.JFrame {
          
          u.setPassword(String.valueOf(jPasswordField1.getPassword()));
          u.setState(true);
+         
+        try {
+            output.writeInt(1);
+            output.writeUTF(name + " " +
+                    firstSurName + " " +
+                    secondSurName + " " +
+                    age + " " +
+                    identification + " " +
+                    email + " " +
+                    password + " " +
+                    state + " " +
+                    nickName + " ");
+        } catch (IOException ex) {
+            handler.showMessage("Error al enviar datos al servidor: " + ex.getMessage(), name, WIDTH);
+        }
+         
          Usuario.Agregar(u);
         
     }
