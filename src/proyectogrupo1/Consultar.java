@@ -41,7 +41,7 @@ public class Consultar extends javax.swing.JFrame {
         
         for(Usuario usuario: users){
             if (usuario.getIdentification().equals(identification)){
-                jTextField1.setText(usuario.getName()+"\n"+usuario.getEmail()+"\n"+usuario.getIdentification());
+                jTextField1.setText(usuario.toString());
                 return;
             }
         }

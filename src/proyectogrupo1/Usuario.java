@@ -6,7 +6,6 @@ package proyectogrupo1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,7 +21,8 @@ public class Usuario extends Persona {
     private boolean state;
     private String nickName;
     private static List<Usuario> users = new ArrayList<>();
-////    
+
+    
     public Usuario (String name, String firstSurName, String secondSurName, byte age, String identification, String email, String password, boolean state, String nickName) {
         super(name, firstSurName, secondSurName, age, identification, email);
         this.password = password;
@@ -153,6 +153,16 @@ public class Usuario extends Persona {
         }
         handler.showMessage("El usuario no fue encontrado", "Error", handler.ERROR);
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + this.getName() + " " + this.getFirstSurName() + " " + this.getSecondSurName() +
+               "\nCédula: " + this.getIdentification() + 
+               "\nCorreo: " + this.getEmail() +
+                "\nEstado: " + this.getState();
+    }
+    
+    
     
     
     public String getPassword() {

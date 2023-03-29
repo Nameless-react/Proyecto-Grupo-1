@@ -9,4 +9,6 @@ Prof. Esteban Marin Chinchilla
 - Joel García Rojas
 - Sebastian Alvarado Vargas
 - Daniel Lopez Arrieta
-siuuu
+
+Para poder hacer uso del servidor del programa primero ejecute por separado el archivo servidor.java
+

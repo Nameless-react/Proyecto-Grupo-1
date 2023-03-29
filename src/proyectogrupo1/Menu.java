@@ -5,13 +5,19 @@
 package proyectogrupo1;
 
 import java.awt.Color;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import javax.swing.JFrame;
 
 /**
  *
  * @author joel
  */
-public class Menu extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame implements Runnable {
+    public final String HOST = "localhost";
+    public final int PORT = 5500;
 
     /**
      * Creates new form Menu
@@ -24,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
+        new Thread(this).start();
         Empleado.getEmployee("empleados.txt");
         Usuario.getUsers("usuarios.txt");
         
@@ -38,7 +45,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
@@ -54,19 +60,6 @@ public class Menu extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         jMenu1.setText("jMenu1");
 
@@ -363,7 +356,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -371,4 +363,24 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        Handler handler = new Handler();
+        
+        try {
+            Socket sc = new Socket(HOST, PORT);
+            DataInputStream input = new DataInputStream(sc.getInputStream());
+            DataOutputStream output = new DataOutputStream(sc.getOutputStream());
+            
+            
+            
+            sc.close();
+            
+            
+        } catch (IOException ex) {
+            handler.showMessage("Error en la conexión: " + ex.getMessage(), "Error", handler.ERROR);
+        }
+            
+    }
 }
