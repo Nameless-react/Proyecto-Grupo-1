@@ -83,6 +83,10 @@ public class Servidor {
             
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/Proyecto", "root", "");
             
+            Statement statement = conexion.createStatement();
+            
+            //ResultSet result = statement.executeQuery("INSERT");
+            
             
         } catch(SQLException sqle) {
             handler.showMessage("Error en el acceso a la base de datos: " + sqle.getMessage(), "Error en la base de datos", handler.ERROR);

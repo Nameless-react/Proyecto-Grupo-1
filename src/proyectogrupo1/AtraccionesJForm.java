@@ -18,7 +18,7 @@ public class AtraccionesJForm extends javax.swing.JFrame {
     public AtraccionesJForm(char tipo){
         this.tipo = tipo;  
         initComponents();
-        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias()) {
+        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias("categorias.txt")) {
             jComboBox1.addItem(categoria.getCategoria());
         }
         

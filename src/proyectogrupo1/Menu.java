@@ -40,8 +40,12 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));
         new Thread(this).start();
+        
+        
         Empleado.getEmployee("empleados.txt");
         Usuario.getUsers("usuarios.txt");
+        Atraccion.getAtracciones("atracciones.txt");
+        CategoriasAtracciones.getCategorias("categorias.txt");
         
     }
 
@@ -290,6 +294,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Handler handler = new Handler();
         Empleado.safeEmployees("empleados.txt");
         Usuario.safeUsers("usuarios.txt");
+        CategoriasAtracciones.safeCategorias("categorias.txt");
+        Atraccion.getAtracciones("atracciones.txt");
         
         try {
             output.writeInt(3);

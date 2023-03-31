@@ -66,7 +66,7 @@ public class Atraccion {
                 
                 
                 
-                atracciones.add(new Atraccion("El martillo", "Montañas Rusas", "n2223456789876543", true));
+                atracciones.add(new Atraccion("El martillo", "Montañas Rusas", "2223456789876543", true));
                 return atracciones;
                 
               } catch (IOException ex02) {
@@ -104,7 +104,7 @@ public class Atraccion {
     public static boolean verificarCat(String categoriaCreada) {
         Handler handler = new Handler();
         
-        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias()) {
+        for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias("categorias.txt")) {
             if(categoria.getCategoria().equals(categoriaCreada)) return true;
         }    
         
@@ -148,13 +148,7 @@ public class Atraccion {
         
         handler.showMessage("Atracción no encontrada", "Error", handler.ERROR);
     }
-    
-    
-    
-    
-    
-    
-    
+
     
     //metodo para editar atracciones
     public static LinkedList<Atraccion> editAtraccion(String nombreAtraccion, Atraccion newAtraccion) {
@@ -172,6 +166,29 @@ public class Atraccion {
         return atracciones;
     }
     
+    public static void safeAtraccion(String fileName) {
+        Handler handler = new Handler();
+        
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            String data = "";
+            
+            
+            for (Atraccion atraccion : atracciones) {
+                data += "\n"
+                        + atraccion.getNombreAtraccion() + "\n"
+                        + atraccion.getCat() + "\n"
+                        + atraccion.getEmpleado() + "\n"
+                        + atraccion.isState() + "\n"
+                        + "|";               
+            }
+            
+            writer.write(data);
+            writer.close();
+        } catch (IOException ex) {
+            handler.showMessage("Error al guardar los datos", "Error", handler.ERROR);
+        }
+    }
 
     public String getNombreAtraccion() {
         return nombreAtraccion;
