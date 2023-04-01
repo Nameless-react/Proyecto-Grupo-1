@@ -19,7 +19,7 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         this.tipo = tipo;  
         initComponents();
         for (CategoriasAtracciones categoria : CategoriasAtracciones.getCategorias("categorias.txt")) {
-            jComboBox1.addItem(categoria.getCategoria());
+            if (categoria.isEstado()) jComboBox1.addItem(categoria.getCategoria());
         }
         
         
@@ -242,7 +242,6 @@ public class AtraccionesJForm extends javax.swing.JFrame {
                 }
             }
         }
-        
         
        Atraccion.crearAtraccion(nombreAtraccionFormulario, categoriaFormulario, identificacionEmpleado);
        

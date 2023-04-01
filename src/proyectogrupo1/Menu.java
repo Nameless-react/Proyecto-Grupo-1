@@ -46,7 +46,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Usuario.getUsers("usuarios.txt");
         Atraccion.getAtracciones("atracciones.txt");
         CategoriasAtracciones.getCategorias("categorias.txt");
-        
     }
 
     /**
@@ -207,6 +206,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton10.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton10.setText("Agregar");
         jButton10.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(204, 204, 255));
         jButton11.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -256,10 +260,10 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(71, 71, 71))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(216, 216, 216)
                 .addComponent(jLabel4)
-                .addGap(118, 118, 118))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +326,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Empleado.safeEmployees("empleados.txt");
         Usuario.safeUsers("usuarios.txt");
         CategoriasAtracciones.safeCategorias("categorias.txt");
-        Atraccion.getAtracciones("atracciones.txt");
+        Atraccion.safeAtraccion("atracciones.txt");
         
         if (input != null) {
             try {
@@ -362,6 +366,10 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         new AtraccionesJForm('e').setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        //Crear el JFrame para crear categorías
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

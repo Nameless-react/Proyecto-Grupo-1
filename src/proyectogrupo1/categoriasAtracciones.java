@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -26,7 +27,7 @@ public class CategoriasAtracciones {
     public CategoriasAtracciones(String categoria, String caracteristicas, boolean estado){
         this.categoria = categoria;
         this.caracteristicas = caracteristicas;
-        this.estado = true;
+        this.estado = estado;
      
     }
     //Refactorizar
@@ -54,7 +55,7 @@ public class CategoriasAtracciones {
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
                     writer.write("\nAcuatica\n" +
-                              "Es una atraccion que se desliza sobre una superficie con agua en lugar de railes, suelen usar un barco en vez de un coche o tren, una atraccion que salpica agua a las personas dentro de la barca\n"
+                              "Es una atraccion que se desliza sobre una superficie con agua en lugar de railes, suelen usar un barco en vez de un coche o tren, una atraccion que salpica agua a las personas dentro de la barca.\n"
                             + "true\n"
                             + "|"
                             + "\nMontañas rusas\n"
@@ -73,12 +74,11 @@ public class CategoriasAtracciones {
                 
                 
                 
-                categorias.add(new CategoriasAtracciones("Acuatica","Es una atraccion que se desliza sobre una superficie con agua en lugar de railes, suelen usar un barco en vez de un coche o tren, una atraccion que salpica agua a las personas dentro de la barca",true));
-                categorias.add(new CategoriasAtracciones("Montañas rusas","Es una atraccion que se desliza sobre railez, pueden llegar a tener una gran altura, usan un coche o un tren como vehiculo, tienen una imagen muchas veces impactante debido a su diseño pero es una atraccion muy segura ",true));
-                categorias.add(new CategoriasAtracciones("Tematicas","Son atracciones que tienen una tematica ya sea patriotica, de algun juego, de alguna pelicula, de alguna epoca del año como puede ser halloween, navidad, año nuevo chino, etc",true));
-                categorias.add(new CategoriasAtracciones("Noria","Es una atraccion que consiste en una rueda vertical que va girando, donde en esa rueda tiene sillas o cabinas donde las personas pueden entrar, tienen vistas espectaculares del larque de atracciones",true));
-                
-                return categorias;
+                    categorias.add(new CategoriasAtracciones("Acuatica","Es una atraccion que se desliza sobre una superficie con agua en lugar de railes, suelen usar un barco en vez de un coche o tren, una atraccion que salpica agua a las personas dentro de la barca.", true));
+                    categorias.add(new CategoriasAtracciones("Montañas rusas","Es una atraccion que se desliza sobre railez, pueden llegar a tener una gran altura, usan un coche o un tren como vehiculo, tienen una imagen muchas veces impactante debido a su diseño pero es una atraccion muy segura.", true));
+                    categorias.add(new CategoriasAtracciones("Tematicas","Son atracciones que tienen una tematica ya sea patriotica, de algun juego, de alguna pelicula, de alguna epoca del año como puede ser halloween, navidad, año nuevo chino, etc.", true));
+                    categorias.add(new CategoriasAtracciones("Noria","Es una atraccion que consiste en una rueda vertical que va girando, donde en esa rueda tiene sillas o cabinas donde las personas pueden entrar, tienen vistas espectaculares del larque de atracciones.", true));
+                    return categorias;
                 
               } catch (IOException ex02) {
                   handler.showMessage("Error al crear archivo: " + ex02.getMessage(), "Error", handler.ERROR);
@@ -88,7 +88,7 @@ public class CategoriasAtracciones {
             
             
             
-            
+           
             handler.showMessage("Error al leer el archivo: " + ex01.getMessage(), "Error", handler.ERROR);
             return new LinkedList<>();
         }
@@ -99,7 +99,8 @@ public class CategoriasAtracciones {
        
         for (int i = 0; i < fileContentList.length; i++) {
             String[] categoria = fileContentList[i].trim().split("\n");
-            if (categoria.length < 6) continue;
+       
+            if (categoria.length < 3) continue;
             
             try {
                 categorias.add(new CategoriasAtracciones(categoria[0], categoria[1], categoria[2].equals("true"))); 
@@ -138,6 +139,7 @@ public class CategoriasAtracciones {
             
             
             for (CategoriasAtracciones categoria : categorias) {
+                System.out.println(categoria.categoria);
                 data += "\n"
                         + categoria.getCategoria() + "\n"
                         + categoria.getCaracteristicas() + "\n"
