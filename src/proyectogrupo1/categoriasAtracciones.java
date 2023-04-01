@@ -153,6 +153,28 @@ public class CategoriasAtracciones {
     }
     
     
+    public static void toggleStateCategory(String nombreCategoria) {
+        Handler handler = new Handler();
+        
+        for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
+            if (atraccion.getCat().equals(nombreCategoria)) {
+                handler.showMessage("No se puede desactivar la categoría debido a que contiene atracciones", "Error", handler.ERROR);
+                return;
+            }
+        }
+        
+        for (CategoriasAtracciones categoria : categorias) {
+            if (categoria.categoria.equals(nombreCategoria)) {
+                categoria.setEstado(!categoria.isEstado());
+                handler.showMessage("La categoría está " + (categoria.estado ? "Activada" : "Desactivada"), "Categoría: " + nombreCategoria, handler.INFORMATION);
+                return;
+            }
+        }
+        
+        handler.showMessage("La categoría no fue encontrada", "No encontrado", handler.ERROR);
+    }
+    
+    
     public String getCategoria() {
         return categoria;
     }

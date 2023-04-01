@@ -102,7 +102,7 @@ public class Usuario extends Persona {
     public static List<Usuario> Agregar(Usuario u){
         Handler h = new Handler();
         for (Usuario usuario : users) {
-            if (usuario.getIdentification().equals(u.getIdentification())) {
+            if (usuario.equals(u)) {
                 h.showMessage("La identificación ya pertenece a un usuario", "Error", h.ERROR);
                 return new ArrayList<>();
             }
@@ -145,7 +145,7 @@ public class Usuario extends Persona {
         Handler handler = new Handler();
         
         for(Usuario usuario: users){ 
-            if(usuario.getIdentification().equals(identification)){
+            if(usuario.equals(identification)){
                 usuario.setState(!usuario.getState());
                 handler.showMessage("Se cambio correctamente el estado de usuario.",  "Usuario: " + usuario.getIdentification(), handler.INFORMATION);
                 return;
@@ -159,7 +159,27 @@ public class Usuario extends Persona {
         return "Nombre: " + this.getName() + " " + this.getFirstSurName() + " " + this.getSecondSurName() +
                "\nCédula: " + this.getIdentification() + 
                "\nCorreo: " + this.getEmail() +
-                "\nEstado: " + this.getState();
+               "\nEstado: " + this.getState();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.getIdentification());
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        
+        if (obj instanceof String string) return string.equals(this.getIdentification());
+        
+        final Usuario other = (Usuario) obj;
+        return Objects.equals(this.getIdentification(), other.getIdentification());
     }
     
     

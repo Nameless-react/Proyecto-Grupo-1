@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  *
@@ -190,6 +191,25 @@ public class Atraccion {
         }
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.nombreAtraccion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        
+        if (obj instanceof String string) return string.equals(this.nombreAtraccion);
+        
+        final Atraccion other = (Atraccion) obj;
+        return Objects.equals(this.nombreAtraccion, other.nombreAtraccion);
+    }
+
     public String getNombreAtraccion() {
         return nombreAtraccion;
     }
@@ -222,7 +242,3 @@ public class Atraccion {
         this.state = state;
     }
 }
-
-
-
-

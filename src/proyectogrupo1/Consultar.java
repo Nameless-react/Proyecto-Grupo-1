@@ -39,8 +39,8 @@ public class Consultar extends javax.swing.JFrame {
         List<Usuario> users = Usuario.getUsers("usuarios.txt");
         
         
-        for(Usuario usuario: users){
-            if (usuario.getIdentification().equals(identification)){
+        for(Usuario usuario : users){
+            if (usuario.equals(identification)){
                 jTextField1.setText(usuario.toString());
                 return;
             }
