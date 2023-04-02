@@ -4,10 +4,8 @@
  */
 package proyectogrupo1;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -51,16 +49,7 @@ public class Empleado extends Persona {
         if (!employees.isEmpty()) return employees;
         
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        
-            
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                fileContent += line + "\n";
-            }
-        
-            bufferedReader.close();
-        
+            fileContent = handler.readFile(fileName);
         } catch (IOException ex01) {
             
             if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {

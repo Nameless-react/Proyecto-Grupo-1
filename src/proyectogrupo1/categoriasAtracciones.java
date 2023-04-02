@@ -4,12 +4,9 @@
  */
 package proyectogrupo1;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -30,7 +27,7 @@ public class CategoriasAtracciones {
         this.estado = estado;
      
     }
-    //Refactorizar
+   
     public static LinkedList<CategoriasAtracciones> getCategorias(String fileName) {
         Handler handler = new Handler();
         String fileContent = "";
@@ -38,16 +35,7 @@ public class CategoriasAtracciones {
         if (!categorias.isEmpty()) return categorias;
         
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        
-            
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                fileContent += line + "\n";
-            }
-        
-            bufferedReader.close();
-        
+            fileContent = handler.readFile(fileName);
         } catch (IOException ex01) {
             
             if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {
@@ -139,7 +127,7 @@ public class CategoriasAtracciones {
             
             
             for (CategoriasAtracciones categoria : categorias) {
-                System.out.println(categoria.categoria);
+                
                 data += "\n"
                         + categoria.getCategoria() + "\n"
                         + categoria.getCaracteristicas() + "\n"

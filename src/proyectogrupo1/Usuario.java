@@ -4,9 +4,7 @@
  */
 package proyectogrupo1;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -37,15 +35,7 @@ public class Usuario extends Persona {
         if (!users.isEmpty()) return users;
         
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        
-            
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                fileContent += line + "\n";
-            }
-        
-            bufferedReader.close();
+            fileContent = handler.readFile(fileName);
         
         } catch (IOException ex01) {
             
@@ -170,20 +160,16 @@ public class Usuario extends Persona {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        
+    public boolean equals(Object obj) {   
+        if (obj instanceof String string) return string.equals(this.getIdentification());
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         
-        if (obj instanceof String string) return string.equals(this.getIdentification());
         
         final Usuario other = (Usuario) obj;
         return Objects.equals(this.getIdentification(), other.getIdentification());
     }
-    
-    
-    
     
     public String getPassword() {
         return password;

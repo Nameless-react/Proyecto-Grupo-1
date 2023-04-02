@@ -4,6 +4,7 @@
  */
 package proyectogrupo1;
 import java.awt.Color;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 
 /**
@@ -14,6 +15,7 @@ public class AtraccionesJForm extends javax.swing.JFrame {
     
     public char tipo;
     public String nombreAtraccion = "";
+    public LinkedList<Atraccion> atracciones = Atraccion.getAtracciones("atracciones.txt");
     
     public AtraccionesJForm(char tipo){
         this.tipo = tipo;  
@@ -50,9 +52,9 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         
         Atraccion defaultAtracciones = new Atraccion();
         
-        for (int i = 0; i < Atraccion.getAtracciones("atracciones.txt").size(); i++) {
-            if (this.nombreAtraccion.equals(Atraccion.getAtracciones("atracciones.txt").get(i).getNombreAtraccion())) {
-                defaultAtracciones = Atraccion.getAtracciones("atracciones.txt").get(i);
+        for (int i = 0; i < atracciones.size(); i++) {
+            if (this.nombreAtraccion.equals(atracciones.get(i).getNombreAtraccion())) {
+                defaultAtracciones = atracciones.get(i);
                 break;
             }
         }
@@ -221,9 +223,10 @@ public class AtraccionesJForm extends javax.swing.JFrame {
             return;
         }
         
-        for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
+        for (Atraccion atraccion : atracciones) {
             if (nombreAtraccionFormulario.equals(atraccion.getNombreAtraccion())) {
                 handler.showMessage("Ya existe una atracción con ese nombre, por favor intente de nuevo", "Error", handler.ERROR);
+                jTextField1.setText("");
                 return;
             }
         }
@@ -231,13 +234,15 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         
          for (Empleado employee : Empleado.getEmployee("empleados.txt")) {  
             if(employee.getIdentification().equals(identificacionEmpleado) && !employee.isState()){
-                handler.showMessage("El empleado no está disponible", "Informacion", handler.ERROR);
+                handler.showMessage("El empleado no está disponible", "Información", handler.ERROR);
+                jTextField3.setText("");
                 return;
             } 
             
-            for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
+            for (Atraccion atraccion : atracciones) {
                 if (atraccion.getEmpleado().equals(identificacionEmpleado)) {
                     handler.showMessage("El empleado ya está asignado a otra atracción", "Información", handler.ERROR);
+                    jTextField3.setText("");
                     return;
                 }
             }

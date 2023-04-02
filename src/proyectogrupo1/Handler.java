@@ -4,6 +4,9 @@
  */
 package proyectogrupo1;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,5 +45,19 @@ public class Handler {
     
     public String capitalize(String text) {
         return text.substring(0,1).toUpperCase() + text.substring(1, text.length());
+    }
+    
+    public String readFile(String fileName) throws IOException {
+        String fileContent = "";
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        
+            
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            fileContent += line + "\n";
+        }
+
+        bufferedReader.close();
+        return fileContent;
     }
 }

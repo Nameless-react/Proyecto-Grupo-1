@@ -4,9 +4,7 @@
  */
 package proyectogrupo1;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -42,16 +40,7 @@ public class Atraccion {
         if (!atracciones.isEmpty()) return atracciones;
         
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
-        
-            
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                fileContent += line + "\n";
-            }
-        
-            bufferedReader.close();
-        
+            fileContent = handler.readFile(fileName);
         } catch (IOException ex01) {
             
             if (ex01.getMessage().matches("[0-9A-Za-z]*\\.txt \\(No such file or directory\\)")) {
@@ -156,8 +145,7 @@ public class Atraccion {
         Handler handler = new Handler();
         
         for (int i = 0; i < atracciones.size(); i++) {
-            
-            if (nombreAtraccion.equals(atracciones.get(i).getNombreAtraccion())) {
+            if (atracciones.get(i).equals(nombreAtraccion)) {
                 atracciones.set(i, newAtraccion);
                 handler.showMessage("Datos actualizados correctamente", "Información", handler.INFORMATION);
                 return atracciones;
@@ -200,11 +188,11 @@ public class Atraccion {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj instanceof String string) return string.equals(this.nombreAtraccion);
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         
-        if (obj instanceof String string) return string.equals(this.nombreAtraccion);
         
         final Atraccion other = (Atraccion) obj;
         return Objects.equals(this.nombreAtraccion, other.nombreAtraccion);
