@@ -81,20 +81,6 @@ public class Agregar extends javax.swing.JFrame {
                  return;
              }
          }
-        try {
-            output.writeInt(1);
-            output.writeUTF(name + " " +
-                    firstSurName + " " +
-                    secondSurName + " " +
-                    age + " " +
-                    identification + " " +
-                    email + " " +
-                    password + " " +
-                    state + " " +
-                    nickName + " ");
-        } catch (IOException ex) {
-            handler.showMessage("Error al enviar datos al servidor: " + ex.getMessage(), name, WIDTH);
-        }
          
         Usuario.Agregar(u);
         this.dispose();

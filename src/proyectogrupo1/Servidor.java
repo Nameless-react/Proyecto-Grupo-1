@@ -34,10 +34,11 @@ public class Servidor {
     public static void main(String args[]) {
         initServer();
     }
-    
+
     
     public static void initServer() {
         Handler handler = new Handler();
+        
         try {
             server = new ServerSocket(PORT);
             System.out.println("Esperando una conexión...");
@@ -46,29 +47,37 @@ public class Servidor {
             input = new DataInputStream(client.getInputStream());
             output = new DataOutputStream(client.getOutputStream());
             
-            int option = 0;
-            while (true) {
-                option = input.readInt();
-                
-                if (option == 3) break;
-                
-                if(option == 1) {
-                    String[] cliente = input.readUTF().split(" ");
-                    try {
-                        clientesRecibidos.add(new Usuario(cliente[0], cliente[1], cliente[2], Byte.parseByte(cliente[3]), cliente[4], cliente[5], cliente[6], "true".equals(cliente[7]), cliente[8]));
+            System.out.println("Conexión establecida");
+        
+            
+            long ingresos = input.readLong();
+            ingresosDiarios += ingresos;
+            
+            String[] clientes = input.readUTF().split("\\|");
                     
+            if (clientes.length != 0)  {
+                for (String users : clientes) {
+                    System.out.println(users);
+                    String[] cliente = users.split(" ");
+                    if (cliente.length < 6) continue;
+                    
+                    try {
+                        clientesRecibidos.add(new Usuario(cliente[1], cliente[2], cliente[3], Byte.parseByte(cliente[6]), cliente[0], cliente[7], cliente[5], "true".equals(cliente[8]), cliente[4]));
+
                     } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        handler.showMessage("Error al guardar los clientes en servidor", "Error en conversión", handler.ERROR);
-                    } 
-                } else if(option == 2) {
-                    long ingresos = input.readLong();
-                    ingresosDiarios += ingresos;
-                }
+                        handler.showMessage("Error al guardar los clientes en el servidor: " + e.getMessage(), "Error en conversión", handler.ERROR);
+                    }
+                }            
             }
+            
+
+
+            saveDataBase();
+
             client.close();
             server.close();
             
-            saveDataBase();
+            System.out.println("Conexión finalizada con el servidor");
         } catch (IOException ex) {
             handler.showMessage("Error en el servidor: " + ex.getMessage(), "Error en servidor", handler.ERROR);
         }
@@ -81,13 +90,36 @@ public class Servidor {
         //Falta completar
         try {
             
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/Proyecto", "root", "");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/Proyecto", "root", "12345678");
+            System.out.println("Conexión establecida con la base de datos");
             
-            Statement statement = conexion.createStatement();
+            Statement statement = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
-            //ResultSet result = statement.executeQuery("INSERT");
+            if (!clientesRecibidos.isEmpty()) {
+                for (Usuario cliente : clientesRecibidos) {
+                    statement.executeUpdate("insert into Cliente(identification, name, firstSurName, secondSurName, age, email, password, state, nickName)" + "values('" + cliente.getIdentification() + "', '"
+                                            + cliente.getName() + "', '" 
+                                            + cliente.getFirstSurName() + "', '"
+                                            + cliente.getSecondSurName() + "', "
+                                            + cliente.getAge() + ", '"
+                                            + cliente.getEmail() + "', '"
+                                            + cliente.getPassword() + "', "
+                                            + cliente.getState() + ", '" 
+                                            + cliente.getNickName() + "')");
+                    System.out.println("Usuario agregado");
+                }
+            }
             
+           
+            ResultSet result = statement.executeQuery("select * from Earnings");
             
+            while (result.next()) {
+                System.out.println(result.getLong("earnings"));
+                ingresosDiarios += result.getLong("earnings");
+            }
+           statement.executeUpdate("update Earnings set earnings = " + ingresosDiarios);
+           System.out.println("Ingresos actualizados"); 
+           
         } catch(SQLException sqle) {
             handler.showMessage("Error en el acceso a la base de datos: " + sqle.getMessage(), "Error en la base de datos", handler.ERROR);
         }

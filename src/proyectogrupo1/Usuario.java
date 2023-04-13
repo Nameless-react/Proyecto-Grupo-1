@@ -19,7 +19,7 @@ public class Usuario extends Persona {
     private boolean state;
     private String nickName;
     private static List<Usuario> users = new ArrayList<>();
-
+    private static List<Usuario> newUsers = new ArrayList<>();
     
     public Usuario (String name, String firstSurName, String secondSurName, byte age, String identification, String email, String password, boolean state, String nickName) {
         super(name, firstSurName, secondSurName, age, identification, email);
@@ -99,6 +99,7 @@ public class Usuario extends Persona {
         }
         
         users.add(u);
+        newUsers.add(u);
         h.showMessage("Usuario agregado exitosamente!", "Exito", h.INFORMATION);
         return users;
     }
@@ -169,6 +170,26 @@ public class Usuario extends Persona {
         
         final Usuario other = (Usuario) obj;
         return Objects.equals(this.getIdentification(), other.getIdentification());
+    }
+    
+    
+    
+    public static String newUsers() {
+        String usersText = "";
+        
+        for (Usuario usuario : newUsers) {
+            usersText += usuario.getIdentification() + " "
+                        + usuario.getName() + " "
+                        + usuario.getFirstSurName() + " "
+                        + usuario.getSecondSurName() + " "
+                        + usuario.getNickName() + " "
+                        + usuario.getPassword() + " "
+                        + usuario.getAge() + " "
+                        + usuario.getEmail() + " "
+                        + usuario.getState() + "|"; 
+        }
+        
+        return usersText;
     }
     
     public String getPassword() {

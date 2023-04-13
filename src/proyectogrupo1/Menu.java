@@ -25,8 +25,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private DataOutputStream output;
     private Socket sc;
     
-    private long ingresosDiarios = 0;
-    private List<Usuario> clientesIngresados = new ArrayList<>();
+    private static long ingresosDiarios = 0;
+    private static List<Usuario> clientesIngresados = new ArrayList<>();
     
     /**
      * Creates new form Menu
@@ -330,7 +330,10 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         
         if (input != null) {
             try {
-                output.writeInt(3);
+                output.writeLong(ingresosDiarios);
+                
+                output.writeUTF(Usuario.newUsers());
+                
                 sc.close();
             } catch (IOException ex) {
                 handler.showMessage("Error al cerrar la conexión con el servidor: " + ex.getMessage(), "Error", handler.ERROR);

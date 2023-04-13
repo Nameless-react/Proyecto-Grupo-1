@@ -176,7 +176,7 @@ public class Empleado extends Persona {
     
     public static void toggleEmployeeState(String identification) {
         Handler handler = new Handler();
-        //Verificar si se puede bloquear el empleado dependiendo si está relacionado con el catalogo de atracciones del proyecto
+        
         for (Atraccion atraccion : Atraccion.getAtracciones("atracciones.txt")) {
             if (atraccion.getEmpleado().equals(identification)) {
                 handler.showMessage("El empleado no se puede desactivar, debido a que se encuentra asignado a una atracción", "Error", handler.ERROR);
