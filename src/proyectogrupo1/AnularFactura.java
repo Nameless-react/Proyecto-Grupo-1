@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import javax.swing.JOptionPane;
 
 public class AnularFactura extends javax.swing.JFrame {
@@ -15,49 +16,50 @@ public class AnularFactura extends javax.swing.JFrame {
     String hora;
     String descAtraccion;
     int monto;
+    String estado;
+    
+    String buscarUsuario = "";
+    String buscarFecha = "";
+    String buscarHora = "";
+    String buscarMonto = "";
     
     public AnularFactura() {
         initComponents();
+        setResizable(false);
+        setTitle("Anular Factura");
+        setLocationRelativeTo(null);
     }
     public void anularFacturas(){
         try{
-            String buscarUsuario = "";
-            String buscarFecha = "";
-            String buscarHora = "";
-            String buscarMonto = "";
-            
-            
+   
             DataInputStream dis = new DataInputStream(new FileInputStream("facturas.dat"));
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.dat"));
+            
             try{
                 while(true){
-                    DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.dat"));
+                  
+                    buscarUsuario = jTextField1.getText();
+                    buscarFecha = jTextField2.getText();
+                    buscarHora = jTextField3.getText();
+                    buscarMonto = jTextField5.getText();
                     
                     usuario = dis.readUTF();
                     fecha = dis.readUTF();
                     hora = dis.readUTF();
                     descAtraccion = dis.readUTF();
                     monto = dis.readInt();
-                    
-                    buscarUsuario = jTextField1.getText();
-                    buscarFecha = jTextField2.getText();
-                    buscarHora = jTextField3.getText();
-                    buscarMonto = jTextField5.getText();
+                    estado = dis.readUTF();
                     
                     
-                    if(buscarUsuario == usuario && buscarFecha == fecha && buscarHora == hora){
-                        usuario = "";
-                        fecha = "";
-                        hora = "";
-                        descAtraccion = "";
-                        monto = 0;
-                        dos.writeUTF(usuario);
-                        dos.writeUTF(fecha);
-                        dos.writeUTF(hora);
-                        dos.writeUTF(descAtraccion);
-                        dos.writeInt(monto);
-                       
-                       
-                        dos.close();
+                    if(buscarUsuario ==usuario && buscarFecha == fecha && buscarHora == hora){
+                        RandomAccessFile raf = new RandomAccessFile("facturas.dat", "rw");
+                        raf.setLength(0);
+                        raf.close();
+                        
+                        
+                        
+                        
+                        
                     }
                     
                 }
@@ -68,9 +70,9 @@ public class AnularFactura extends javax.swing.JFrame {
                 }
             
             }catch(FileNotFoundException ex03){
-                JOptionPane.showMessageDialog(null,"Error Desconocido!","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"No se encontro el archivo","Error", JOptionPane.ERROR_MESSAGE);
             }catch(IOException ex02){
-                JOptionPane.showMessageDialog(null, "No se encontro el archivo", "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error Desconocido!", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     
