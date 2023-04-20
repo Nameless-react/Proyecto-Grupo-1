@@ -57,7 +57,6 @@ public class Servidor {
                     
             if (clientes.length != 0)  {
                 for (String users : clientes) {
-                    System.out.println(users);
                     String[] cliente = users.split(" ");
                     if (cliente.length < 6) continue;
                     
@@ -95,7 +94,7 @@ public class Servidor {
             
             Statement statement = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
-            if (!clientesRecibidos.isEmpty()) {
+            if (!clientesRecibidos.isEmpty()) { 
                 for (Usuario cliente : clientesRecibidos) {
                     statement.executeUpdate("insert into Cliente(identification, name, firstSurName, secondSurName, age, email, password, state, nickName)" + "values('" + cliente.getIdentification() + "', '"
                                             + cliente.getName() + "', '" 
