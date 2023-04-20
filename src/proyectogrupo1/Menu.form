@@ -447,6 +447,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -462,7 +465,7 @@
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name=".SF NS Text" size="13" style="1"/>
+          <Font name="Helvetica Neue" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Crear"/>
       </Properties>
@@ -476,7 +479,7 @@
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name=".SF NS Text" size="13" style="1"/>
+          <Font name="Helvetica Neue" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Anular"/>
       </Properties>

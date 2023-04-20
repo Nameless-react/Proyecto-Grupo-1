@@ -11,4 +11,4 @@ Prof. Esteban Marin Chinchilla
 - Daniel Lopez Arrieta
 
 Para poder hacer uso del servidor del programa primero ejecute por separado el archivo servidor.java
-
+Para la configuración de la base de datos ejecutar el archivo basesDatosJava.sql

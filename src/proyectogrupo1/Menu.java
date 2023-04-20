@@ -219,12 +219,17 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton11.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton11.setText("Activar/desactivar");
         jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
         jLabel6.setText("Facturas");
 
         jButton12.setBackground(new java.awt.Color(204, 204, 255));
-        jButton12.setFont(new java.awt.Font(".SF NS Text", 1, 13)); // NOI18N
+        jButton12.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton12.setText("Crear");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +238,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         });
 
         jButton13.setBackground(new java.awt.Color(204, 204, 255));
-        jButton13.setFont(new java.awt.Font(".SF NS Text", 1, 13)); // NOI18N
+        jButton13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton13.setText("Anular");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,14 +423,16 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        CrearFactura c = new CrearFactura();
-        c.setVisible(true);
+        new CrearFactura().setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        AnularFactura a = new AnularFactura();
-        a.setVisible(true);
+        new AnularFactura().setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
