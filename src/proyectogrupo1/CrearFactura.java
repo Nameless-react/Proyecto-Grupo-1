@@ -29,7 +29,7 @@ public class CrearFactura extends javax.swing.JFrame {
             monto = Integer.parseInt(jTextField5.getText());
             estado = "Activa";
             
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.dat", true));
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.txt", true));
             
             dos.writeUTF(usuario);
             dos.writeUTF(fecha);
