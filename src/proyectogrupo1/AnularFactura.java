@@ -105,7 +105,7 @@ public class AnularFactura extends javax.swing.JFrame {
 
         jLabel2.setText("Hora:");
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -128,7 +128,7 @@ public class AnularFactura extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
         jLabel3.setText("Anular");
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -137,7 +137,7 @@ public class AnularFactura extends javax.swing.JFrame {
 
         jLabel6.setText("Usuario:");
 
-        jTextField5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextField5.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -146,7 +146,7 @@ public class AnularFactura extends javax.swing.JFrame {
 
         jLabel4.setText("Monto:");
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextField3.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -208,7 +208,7 @@ public class AnularFactura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)

@@ -90,6 +90,7 @@ public class CrearFactura extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextField3.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -102,15 +103,18 @@ public class CrearFactura extends javax.swing.JFrame {
             }
         });
 
+        jTextField5.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
+        jButton1.setBackground(new java.awt.Color(98, 54, 255));
         jButton1.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Crear");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -119,6 +123,7 @@ public class CrearFactura extends javax.swing.JFrame {
 
         jLabel6.setText("Usuario:");
 
+        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -149,6 +154,7 @@ public class CrearFactura extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
         jLabel5.setText("Crear Factura");
 
+        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 3, 7, 7));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -235,7 +241,7 @@ public class CrearFactura extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
