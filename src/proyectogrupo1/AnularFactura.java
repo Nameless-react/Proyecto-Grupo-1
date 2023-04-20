@@ -32,8 +32,8 @@ public class AnularFactura extends javax.swing.JFrame {
     public void anularFacturas(){
         try{
    
-            DataInputStream dis = new DataInputStream(new FileInputStream("facturas.dat"));
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.dat"));
+            DataInputStream dis = new DataInputStream(new FileInputStream("facturas.txt"));
+            
             
             try{
                 while(true){
@@ -52,13 +52,9 @@ public class AnularFactura extends javax.swing.JFrame {
                     
                     
                     if(buscarUsuario ==usuario && buscarFecha == fecha && buscarHora == hora){
-                        RandomAccessFile raf = new RandomAccessFile("facturas.dat", "rw");
+                        RandomAccessFile raf = new RandomAccessFile("facturas.txt", "rw");
                         raf.setLength(0);
-                        raf.close();
-                        
-                        
-                        
-                        
+                        raf.close();   
                         
                     }
                     
