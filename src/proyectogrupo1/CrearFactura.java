@@ -11,6 +11,7 @@ public class CrearFactura extends javax.swing.JFrame {
     String fecha;
     String hora;
     String descAtraccion;
+    String estado;
     int monto;
     
     public CrearFactura() {
@@ -26,6 +27,7 @@ public class CrearFactura extends javax.swing.JFrame {
             hora = jTextField3.getText();
             descAtraccion = jTextField4.getText();
             monto = Integer.parseInt(jTextField5.getText());
+            estado = "Activa";
             
             DataOutputStream dos = new DataOutputStream(new FileOutputStream("facturas.dat", true));
             
@@ -34,6 +36,7 @@ public class CrearFactura extends javax.swing.JFrame {
             dos.writeUTF(hora);
             dos.writeUTF(descAtraccion);
             dos.writeInt(monto);
+            dos.writeUTF(estado);
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados!", "Datos Guardados", JOptionPane.INFORMATION_MESSAGE);
             
             String factura[] = {jTextField1.getText(),jTextField2.getText(), jTextField3.getText(),jTextField4.getText(),jTextField5.getText()};
@@ -41,8 +44,10 @@ public class CrearFactura extends javax.swing.JFrame {
             DefaultTableModel tableModel = (DefaultTableModel)jTable1.getModel();
             tableModel.addRow(factura);
             
+            
             limpiar();
             dos.close();
+            
             
         }catch(IOException ex01){
             JOptionPane.showMessageDialog(null, "Error desconocido!", "Error",JOptionPane.ERROR_MESSAGE);
