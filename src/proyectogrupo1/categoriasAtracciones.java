@@ -102,32 +102,30 @@ public class CategoriasAtracciones {
         return categorias;
     }
     
-    public static LinkedList<CategoriasAtracciones> addCategorias(String nombre, String descripcion, boolean estado) { 
+    public static LinkedList<CategoriasAtracciones> addCategorias(CategoriasAtracciones newCategoria) { 
         Handler handler = new Handler();
         
         for (CategoriasAtracciones categoria : categorias) {
-            if(categoria.getCategoria().equals(nombre)) {
+            if(categoria.getCategoria().equals(newCategoria.getCategoria())) {
                 handler.showMessage("Ya existe una categoría con ese nombre", "Categoría duplicada", handler.ERROR);
                 return new LinkedList<>();
             }
         
         }
         
-        categorias.add(new CategoriasAtracciones(nombre, descripcion, estado));
+        categorias.add(newCategoria);
         return categorias;
     }
 
     
     public static void safeCategorias(String fileName) {
         Handler handler = new Handler();
-        
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             String data = "";
             
             
             for (CategoriasAtracciones categoria : categorias) {
-                
                 data += "\n"
                         + categoria.getCategoria() + "\n"
                         + categoria.getCaracteristicas() + "\n"

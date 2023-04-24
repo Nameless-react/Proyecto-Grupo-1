@@ -25,8 +25,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private DataOutputStream output;
     private Socket sc;
     
-    private static long ingresosDiarios = 0;
-    private static List<Usuario> clientesIngresados = new ArrayList<>();
     
     /**
      * Creates new form Menu
@@ -46,6 +44,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Usuario.getUsers("usuarios.txt");
         Atraccion.getAtracciones("atracciones.txt");
         CategoriasAtracciones.getCategorias("categorias.txt");
+        new Facturas().getInvoices("facturas.txt");
     }
 
     /**
@@ -140,6 +139,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton4.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton4.setText("Agregar");
         jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -150,6 +150,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton5.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton5.setText("Consultar");
         jButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -160,6 +161,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton6.setText("Activar/desactivar");
         jButton6.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -209,6 +211,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton10.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton10.setText("Agregar");
         jButton10.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -219,6 +222,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton11.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton11.setText("Activar/desactivar");
         jButton11.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -226,11 +230,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         });
 
         jLabel6.setFont(new java.awt.Font(".SF NS Text", 1, 18)); // NOI18N
-        jLabel6.setText("Facturas");
+        jLabel6.setText("Facturas:");
 
         jButton12.setBackground(new java.awt.Color(204, 204, 255));
         jButton12.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton12.setText("Crear");
+        jButton12.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton12.setBorderPainted(false);
+        jButton12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -240,6 +247,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton13.setBackground(new java.awt.Color(204, 204, 255));
         jButton13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jButton13.setText("Anular");
+        jButton13.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -375,10 +384,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Usuario.safeUsers("usuarios.txt");
         CategoriasAtracciones.safeCategorias("categorias.txt");
         Atraccion.safeAtraccion("atracciones.txt");
+        new Facturas().safeInvoices("facturas.txt");
         
         if (input != null) {
             try {
-                output.writeLong(ingresosDiarios);
+                output.writeLong(Facturas.totalMoneyEarn);
                 
                 output.writeUTF(Usuario.newUsers());
                 
@@ -409,9 +419,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         Handler handler = new Handler();
-        String nombreAtraccion = handler.inputString("Digite el nombre de la atracción: ");
-        Atraccion.cambiarEstadoAtraccion(nombreAtraccion);
-            
+        String nombreAtraccion = handler.capitalize(handler.inputString("Digite el nombre de la atracción: "));
+        Atraccion.cambiarEstadoAtraccion(nombreAtraccion);  
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -419,7 +428,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        //Crear el JFrame para crear categorías
+        new Categorias().setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -427,11 +436,15 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        new AnularFactura().setVisible(true);
+        Handler handler = new Handler();
+        int numeroFactura = handler.inputInt("Digite el número de factura que desea cancelar: ");
+        new Facturas().cancelInvoice(numeroFactura);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        Handler handler = new Handler();
+        String nombreCategoria = handler.capitalize(handler.inputString("Digite el nombre de la categoría a la cual desea cambiar el estado"));
+        CategoriasAtracciones.toggleStateCategory(nombreCategoria);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**

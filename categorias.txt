@@ -9,9 +9,9 @@ true
 |
 Tematicas
 Son atracciones que tienen una tematica ya sea patriotica, de algun juego, de alguna pelicula, de alguna epoca del año como puede ser halloween, navidad, año nuevo chino, etc.
-true
+false
 |
 Noria
 Es una atraccion que consiste en una rueda vertical que va girando, donde en esa rueda tiene sillas o cabinas donde las personas pueden entrar, tienen vistas espectaculares del larque de atracciones.
-false
+true
 |

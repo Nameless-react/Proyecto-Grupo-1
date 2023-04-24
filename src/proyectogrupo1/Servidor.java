@@ -113,7 +113,6 @@ public class Servidor {
             ResultSet result = statement.executeQuery("select * from Earnings");
             
             while (result.next()) {
-                System.out.println(result.getLong("earnings"));
                 ingresosDiarios += result.getLong("earnings");
             }
            statement.executeUpdate("update Earnings set earnings = " + ingresosDiarios);
