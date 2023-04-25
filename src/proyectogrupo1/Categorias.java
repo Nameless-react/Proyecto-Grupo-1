@@ -154,9 +154,7 @@ public class Categorias extends javax.swing.JFrame {
             return;
         }
         
-        CategoriasAtracciones categoria = new CategoriasAtracciones(nombre, descripcion, true);
-        
-        CategoriasAtracciones.addCategorias(categoria);
+        CategoriasAtracciones.addCategorias(new CategoriasAtracciones(nombre, descripcion, true));
         handler.showMessage("Categoría agregada exitosamente", "Guardado", handler.INFORMATION);
         
         jTextField1.setText("");

@@ -48,7 +48,7 @@ public class Atraccion {
               try {
                   BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
                   writer.write("\nEl martillo\n" +
-                            "Montañas Rusas\n" +
+                            "Montañas rusas\n" +
                             "2223456789876543\n" +
                             "true\n" +
                             "|");
@@ -56,7 +56,7 @@ public class Atraccion {
                 
                 
                 
-                atracciones.add(new Atraccion("El martillo", "Montañas Rusas", "2223456789876543", true));
+                atracciones.add(new Atraccion("El martillo", "Montañas rusas", "2223456789876543", true));
                 return atracciones;
                 
               } catch (IOException ex02) {
@@ -114,7 +114,7 @@ public class Atraccion {
         
     }
     
-    // Metodo para editar estado de la atraccion
+    // Método para editar estado de la atraccion
     public static void cambiarEstadoAtraccion(String nombreAtraccion) {
         Handler handler = new Handler();
         //cambiar el estado dependiendo del empleado enlazado
@@ -143,7 +143,7 @@ public class Atraccion {
     //metodo para editar atracciones
     public static LinkedList<Atraccion> editAtraccion(String nombreAtraccion, Atraccion newAtraccion) {
         Handler handler = new Handler();
-        
+         
         for (int i = 0; i < atracciones.size(); i++) {
             if (atracciones.get(i).equals(nombreAtraccion)) {
                 atracciones.set(i, newAtraccion);

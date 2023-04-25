@@ -15,7 +15,6 @@ import javax.swing.JFrame;
  * @author Daniel Lopez
  */
 public class Agregar extends javax.swing.JFrame {
-    private DataOutputStream output;
     /**
      * Creates new form Agregar
      */
@@ -31,11 +30,10 @@ public class Agregar extends javax.swing.JFrame {
     
     public Agregar(DataOutputStream output) {
         initComponents();
-        this.output = output;
         
         
         setLocationRelativeTo(null);
-        setTitle("Formulario");
+        setTitle("Formulario de usuarios");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setBackground(new Color(0xF0F0F0));

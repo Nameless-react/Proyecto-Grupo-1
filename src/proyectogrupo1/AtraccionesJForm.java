@@ -13,9 +13,11 @@ import javax.swing.JFrame;
  */
 public class AtraccionesJForm extends javax.swing.JFrame {
     
-    public char tipo;
-    public String nombreAtraccion = "";
-    public LinkedList<Atraccion> atracciones = Atraccion.getAtracciones("atracciones.txt");
+    private char tipo;
+    private String nombreAtraccion = "";
+    private LinkedList<Atraccion> atracciones = Atraccion.getAtracciones("atracciones.txt");
+    private Atraccion atractionEdit;
+    
     
     public AtraccionesJForm(char tipo){
         this.tipo = tipo;  
@@ -33,9 +35,7 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         
         jButton1.setText(tipo == 'c' ? "Enviar" : "Editar");
         
-        if (tipo != 'c') {
-            editarAtraccion();
-        }
+        if (tipo != 'c') editarAtraccion();
     }
     
     
@@ -45,9 +45,9 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         
         
         do {
-            this.nombreAtraccion = handler.inputString("Digite el nombre de la atraccion").trim();
+            this.nombreAtraccion = handler.capitalize(handler.inputString("Digite el nombre de la atracción")).trim();
             if (this.nombreAtraccion == null) this.nombreAtraccion = "";
-        } while (this.nombreAtraccion.length() < 1);
+        } while (this.nombreAtraccion.length() < 2);
         
         
         Atraccion defaultAtracciones = new Atraccion();
@@ -55,14 +55,15 @@ public class AtraccionesJForm extends javax.swing.JFrame {
         for (int i = 0; i < atracciones.size(); i++) {
             if (this.nombreAtraccion.equals(atracciones.get(i).getNombreAtraccion())) {
                 defaultAtracciones = atracciones.get(i);
+                this.atractionEdit = defaultAtracciones;
                 break;
             }
         }
         
         
+        if (defaultAtracciones.getNombreAtraccion().isEmpty()) handler.showMessage("Atracción no encontrada: 404", "Error", handler.ERROR);
         
-        if (defaultAtracciones.getNombreAtraccion().isEmpty()) handler.showMessage("Atraccion no encontrada: 404", "Error", handler.ERROR);
-        
+       
         jComboBox1.setSelectedItem(defaultAtracciones.getCat());
         jTextField2.setText(defaultAtracciones.getNombreAtraccion());
         jTextField3.setText(defaultAtracciones.getEmpleado());
@@ -219,16 +220,56 @@ public class AtraccionesJForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Handler handler = new Handler();
-        String nombreAtraccionFormulario = jTextField2.getText();
+        String nombreAtraccionFormulario = handler.capitalize(jTextField2.getText());
         String categoriaFormulario = String.valueOf(jComboBox1.getSelectedItem());
         String identificacionEmpleado = jTextField3.getText();
 
+        
+      
+        
+        
+        
+         boolean find = false;
+        for (Empleado employee : Empleado.getEmployee("empleados.txt")) {
+            if (employee.getIdentification().equals(identificacionEmpleado)) {
+                find = true;
+                break;
+            }
+        }
+        
+        if (!find) {
+            handler.showMessage("La identificación de empleado no existe", "Empleado no existente", handler.ERROR);
+            if (this.tipo == 'e') jTextField3.setText(atractionEdit.getEmpleado());
+            else jTextField3.setText("");
+            return;
+        }
+        
+        for (Empleado employee : Empleado.getEmployee("empleados.txt")) {  
+            if(employee.getIdentification().equals(identificacionEmpleado) && !employee.isState()){
+                handler.showMessage("El empleado no está disponible", "Información", handler.ERROR);
+                if (this.tipo == 'e') jTextField3.setText(atractionEdit.getEmpleado());
+                else jTextField3.setText("");
+                return;
+            } 
+            
+            
+            for (Atraccion atraccion : atracciones) {
+                if (atraccion.getEmpleado().equals(identificacionEmpleado)) {
+                    handler.showMessage("El empleado ya está asignado a otra atracción", "Información", handler.ERROR);
+                    if (this.tipo == 'e') jTextField3.setText(atractionEdit.getEmpleado());
+                    else jTextField3.setText("");
+                    return;
+                }
+            }
+        }
         
         if (tipo != 'c') {
             Atraccion.editAtraccion(this.nombreAtraccion, new Atraccion(nombreAtraccionFormulario, categoriaFormulario, identificacionEmpleado, true));
             this.dispose();
             return;
         }
+        
+        
         
         for (Atraccion atraccion : atracciones) {
             if (nombreAtraccionFormulario.equals(atraccion.getNombreAtraccion())) {
@@ -238,22 +279,6 @@ public class AtraccionesJForm extends javax.swing.JFrame {
             }
         }
         
-        
-         for (Empleado employee : Empleado.getEmployee("empleados.txt")) {  
-            if(employee.getIdentification().equals(identificacionEmpleado) && !employee.isState()){
-                handler.showMessage("El empleado no está disponible", "Información", handler.ERROR);
-                jTextField3.setText("");
-                return;
-            } 
-            
-            for (Atraccion atraccion : atracciones) {
-                if (atraccion.getEmpleado().equals(identificacionEmpleado)) {
-                    handler.showMessage("El empleado ya está asignado a otra atracción", "Información", handler.ERROR);
-                    jTextField3.setText("");
-                    return;
-                }
-            }
-        }
         
        Atraccion.crearAtraccion(nombreAtraccionFormulario, categoriaFormulario, identificacionEmpleado);
        
