@@ -109,7 +109,7 @@ public class Servidor {
                 }
             }
             
-           
+           statement.execute("insert into Earnings(earnings) values(" + ingresosDiarios + ")");
             ResultSet result = statement.executeQuery("select * from Earnings");
             
             while (result.next()) {
