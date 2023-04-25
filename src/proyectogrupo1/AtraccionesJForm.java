@@ -254,7 +254,7 @@ public class AtraccionesJForm extends javax.swing.JFrame {
             
             
             for (Atraccion atraccion : atracciones) {
-                if (atraccion.getEmpleado().equals(identificacionEmpleado)) {
+                if (atraccion.getEmpleado().equals(identificacionEmpleado) && !this.atractionEdit.getEmpleado().equals(identificacionEmpleado)) {
                     handler.showMessage("El empleado ya está asignado a otra atracción", "Información", handler.ERROR);
                     if (this.tipo == 'e') jTextField3.setText(atractionEdit.getEmpleado());
                     else jTextField3.setText("");

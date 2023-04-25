@@ -140,7 +140,7 @@ public class Categorias extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Handler handler = new Handler();
         
-        String nombre = jTextField1.getText();
+        String nombre = handler.capitalize(jTextField1.getText());
         if (nombre.length() < 2) {
             handler.showMessage("El nombre de la categoría no es valido", "Error", handler.ERROR);
             jTextField1.setText("");
